@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Icon Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+        }
+        .button:hover {
+            background-color: #dc2626;
+        }
+        .button.secondary {
+            background-color: #3b82f6;
+        }
+        .button.secondary:hover {
+            background-color: #2563eb;
+        }
+        .code {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .success {
+            background-color: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 15px 0;
+            display: none;
+        }
+        h1, h2 {
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fix Icon Selector</h1>
+    
+    <div class="warning">
+        <strong>Problem:</strong> The icon selector modal is stuck on your screen and won't close.
+    </div>
+    
+    <div id="success-message" class="success">
+        <strong>Success!</strong> The icon selector has been closed. You can now return to your dashboard.
+    </div>
+    
+    <h2>Option 1: Direct Fix</h2>
+    <p>Click the button below to attempt to close the icon selector:</p>
+    <button id="fix-button" class="button">Close Icon Selector</button>
+    
+    <h2>Option 2: Return to Dashboard</h2>
+    <p>Click the button below to return to the dashboard with a special parameter that will close the icon selector:</p>
+    <a href="/dashboard?close_icon_selector=1" class="button secondary">Go to Dashboard</a>
+    
+    <h2>Option 3: Manual Fix (Developer Console)</h2>
+    <p>If the above options don't work, open your browser's developer console (F12 or right-click > Inspect > Console) and paste this code:</p>
+    <div class="code">
+document.getElementById('iconSelector').style.display = 'none';
+document.querySelectorAll('.icon-selector').forEach(el => el.style.display = 'none');
+    </div>
+    
+    <script>
+        document.getElementById('fix-button').addEventListener('click', function() {
+            // Add CSS to force hide the icon selector
+            var style = document.createElement('style');
+            style.textContent = `
+                #iconSelector, .icon-selector {
+                    display: none !important;
+                    visibility: hidden !important;
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Try to directly manipulate the DOM
+            try {
+                var iconSelector = document.getElementById('iconSelector');
+                if (iconSelector) {
+                    iconSelector.style.display = 'none';
+                    iconSelector.classList.add('hidden');
+                }
+                
+                document.querySelectorAll('.icon-selector').forEach(function(el) {
+                    el.style.display = 'none';
+                    el.classList.add('hidden');
+                });
+                
+                // Show success message
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Redirect after a short delay
+                setTimeout(function() {
+                    window.location.href = '/dashboard?close_icon_selector=1';
+                }, 2000);
+            } catch (e) {
+                console.error(e);
+                alert('Error: ' + e.message + '\nPlease try Option 2 or 3 instead.');
+            }
+        });
+    </script>
+</body>
+</html>
