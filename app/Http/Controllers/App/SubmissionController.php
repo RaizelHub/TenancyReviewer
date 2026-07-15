@@ -21,40 +21,8 @@ class SubmissionController extends Controller
     public function index()
     {
         try {
-            // Add debug logging
-            Log::info('Fetching submissions for index view');
-
-            // Check if we're in a tenant context
-            Log::info('Tenant context check', [
-                'is_tenant' => tenant() ? 'Yes' : 'No',
-                'tenant_id' => tenant() ? tenant()->id : 'None',
-                'database' => DB::connection()->getDatabaseName()
-            ]);
-
-            // Get all submissions from the database
-            $allSubmissions = Submission::all();
-            Log::info('Raw submissions count: ' . $allSubmissions->count());
-
-            // Get submissions with relationships
+            // Load only the current page and the relationships displayed in the table.
             $submissions = Submission::with(['student', 'activity'])->latest()->paginate(10);
-
-            // Log the count of submissions
-            Log::info('Found ' . $submissions->count() . ' submissions for display');
-
-            // Log some details about the first few submissions if any exist
-            if ($submissions->count() > 0) {
-                $sampleSubmissions = $submissions->take(3);
-                foreach ($sampleSubmissions as $index => $submission) {
-                    Log::info("Submission #{$index} details", [
-                        'id' => $submission->id,
-                        'student_id' => $submission->student_id,
-                        'activity_id' => $submission->activity_id,
-                        'status' => $submission->status,
-                        'has_student' => $submission->student ? 'Yes' : 'No',
-                        'has_activity' => $submission->activity ? 'Yes' : 'No'
-                    ]);
-                }
-            }
 
             return view('app.submissions.index', compact('submissions'));
         } catch (\Exception $e) {

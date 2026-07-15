@@ -8,7 +8,7 @@ use App\Notifications\TenantApplicationRejected;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
+// Mail facade removed — emails sent via EmailJS from frontend
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -202,7 +202,7 @@ class SubscriptionController extends Controller
             try {
                 // Format the domain properly
                 $domainName = strtolower($application->domain_name);
-            $domain = $domainName . '.localhost';
+                $domain = $domainName . '.' . config('app.domain');
 
                 Log::info('Attempting to create tenant domain', [
                     'tenant_id' => $tenant->id,
@@ -314,33 +314,30 @@ class SubscriptionController extends Controller
                 // Continue with the process even if seeding fails
             }
 
-            // Send approval email with login credentials
-            try {
-                // Direct mail sending instead of notification
-                Mail::send([], [], function ($message) use ($application, $password, $domain) {
-                    $message->to($application->email, $application->full_name)
-                        ->subject('Your Tenant Application Has Been Approved')
-                        ->html(view('emails.tenant-approved', [
-                            'application' => $application,
-                            'password' => $password,
-                            'domain' => $domain
-                        ])->render());
-                });
-            } catch (\Exception $e) {
-                // Log the error but don't stop the process
-                Log::error('Failed to send tenant approval email: ' . $e->getMessage());
-            }
-
-            // Create a success message that includes the domain information
+            // Build success message
             $successMessage = 'Tenant application approved and tenant created successfully.';
-
-            // Add domain information if a domain was created
             if ($domainCreated && !empty($domain)) {
                 $successMessage .= ' Domain: ' . $domain;
             }
 
+            // Flash approval data to session so EmailJS (frontend) can send the email
+            $port = request()->getPort();
+            $isNonStandard = (request()->getScheme() === 'http' && $port != 80) || (request()->getScheme() === 'https' && $port != 443);
+            $domainWithPort = $domain . ($isNonStandard ? ':' . $port : '');
+
+            // Log action
+            \App\Models\ActivityLog::log('Application Approved', "Approved subscription application for {$application->company_name} (Plan: {$application->subscription_plan}).");
+
             return redirect()->route('applications.index')
-                ->with('success', $successMessage);
+                ->with('success', $successMessage)
+                ->with('emailjs_approved', [
+                    'to_email' => $application->email,
+                    'to_name'  => $application->full_name,
+                    'company'  => $application->company_name,
+                    'domain'   => $domainWithPort,
+                    'password' => $password,
+                    'plan'     => $application->subscription_plan,
+                ]);
     }
 
     /**
@@ -362,6 +359,9 @@ class SubscriptionController extends Controller
             // Log the error but don't stop the process
             Log::error('Failed to send tenant rejection email: ' . $e->getMessage());
         }
+
+        // Log action
+        \App\Models\ActivityLog::log('Application Rejected', "Rejected subscription application for {$application->company_name}. Reason: " . ($request->notes ?: 'None provided'));
 
         return redirect()->route('applications.index')
             ->with('success', 'Tenant application rejected successfully.');

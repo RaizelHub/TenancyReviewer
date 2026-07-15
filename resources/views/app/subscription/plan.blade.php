@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div class="flex items-center">
-                <div class="p-2 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white mr-3 shadow-md">
+                <div class="p-2 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white mr-3 shadow-md">
                     <i class="fas fa-crown text-lg"></i>
                 </div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -35,8 +35,8 @@
             <!-- Current Plan Summary -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 mb-8 hover:shadow-lg transition-all duration-300">
                 <div class="bg-gradient-to-r
-                    {{ $currentPlan == 'Pro' ? 'from-purple-600 to-indigo-600' :
-                       ($currentPlan == 'Premium' ? 'from-indigo-600 to-blue-600' :
+                    {{ $currentPlan == 'Pro' ? 'from-emerald-600 to-emerald-600' :
+                       ($currentPlan == 'Premium' ? 'from-emerald-600 to-blue-600' :
                        'from-blue-600 to-sky-600') }} text-white p-4">
                     <h3 class="text-lg font-semibold">Your Current Subscription</h3>
                 </div>
@@ -45,8 +45,8 @@
                     <div class="flex flex-col md:flex-row md:items-center justify-between">
                         <div class="flex items-center mb-6 md:mb-0">
                             <div class="p-4 rounded-full
-                                {{ $currentPlan == 'Pro' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' :
-                                   ($currentPlan == 'Premium' ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' :
+                                {{ $currentPlan == 'Pro' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' :
+                                   ($currentPlan == 'Premium' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' :
                                    'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400') }} mr-5 shadow-sm">
                                 <i class="fas
                                     {{ $currentPlan == 'Pro' ? 'fa-crown' :
@@ -115,8 +115,8 @@
                             <div class="border rounded-xl overflow-hidden hover:shadow-md transition-all duration-300
                                 {{ $currentPlan === $plan ? 'border-2 border-' . $plans[$plan]['color'] . '-500 dark:border-' . $plans[$plan]['color'] . '-400 shadow-md' : 'border-gray-200 dark:border-gray-700' }}">
                                 <div class="p-5 bg-gradient-to-r
-                                    {{ $plan == 'Pro' ? 'from-purple-500 to-indigo-600' :
-                                       ($plan == 'Premium' ? 'from-indigo-500 to-blue-600' :
+                                    {{ $plan == 'Pro' ? 'from-emerald-500 to-emerald-600' :
+                                       ($plan == 'Premium' ? 'from-emerald-500 to-blue-600' :
                                        'from-blue-500 to-sky-600') }} text-white">
                                     <div class="flex items-center justify-between">
                                         <h4 class="text-lg font-bold">{{ $plan }}</h4>
@@ -161,18 +161,15 @@
                                                 Current Plan
                                             </button>
                                         @else
-                                            <form action="{{ route('subscription.change-plan') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="plan" value="{{ $plan }}">
-                                                <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-3
-                                                    {{ $currentPlan < $plan ?
-                                                        'bg-gradient-to-r from-' . $plans[$plan]['color'] . '-500 to-' . $plans[$plan]['color'] . '-600' :
-                                                        'bg-gray-600' }}
-                                                    text-white rounded-lg hover:shadow-md transition-all duration-300">
-                                                    <i class="fas {{ $currentPlan < $plan ? 'fa-arrow-up' : 'fa-arrow-down' }} mr-2"></i>
-                                                    {{ $currentPlan < $plan ? 'Upgrade' : 'Downgrade' }} to {{ $plan }}
-                                                </button>
-                                            </form>
+                                            <a href="{{ route('subscription.checkout', ['plan' => $plan]) }}"
+                                               class="w-full inline-flex items-center justify-center px-4 py-3
+                                                {{ $currentPlan < $plan ?
+                                                    'bg-gradient-to-r from-' . $plans[$plan]['color'] . '-500 to-' . $plans[$plan]['color'] . '-600' :
+                                                    'bg-gray-600' }}
+                                                text-white rounded-lg hover:shadow-md transition-all duration-300 hover:opacity-90">
+                                                <i class="fas {{ $currentPlan < $plan ? 'fa-arrow-up' : 'fa-arrow-down' }} mr-2"></i>
+                                                {{ $currentPlan < $plan ? 'Upgrade' : 'Downgrade' }} to {{ $plan }}
+                                            </a>
                                         @endif
                                     </div>
                                 </div>

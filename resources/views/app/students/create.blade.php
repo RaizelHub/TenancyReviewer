@@ -35,7 +35,7 @@
                         <!-- Name -->
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                             @error('name')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -44,7 +44,7 @@
                         <!-- Email -->
                         <div class="mb-4">
                             <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                            <input type="email" name="email" id="email" value="{{ old('email') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                             @error('email')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -53,7 +53,7 @@
                         <!-- Student ID -->
                         <div class="mb-4">
                             <label for="student_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Student ID (Optional)</label>
-                            <input type="text" name="student_id" id="student_id" value="{{ old('student_id') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                            <input type="text" name="student_id" id="student_id" value="{{ old('student_id') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
                             @error('student_id')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -71,7 +71,7 @@
                         <!-- Notes -->
                         <div class="mb-4">
                             <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Notes (Optional)</label>
-                            <textarea name="notes" id="notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('notes') }}</textarea>
+                            <textarea name="notes" id="notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">{{ old('notes') }}</textarea>
                             @error('notes')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -81,7 +81,7 @@
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Student Plan</label>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="relative border rounded-lg p-4 cursor-pointer hover:border-indigo-500 transition-colors {{ old('plan') == 'basic' ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30' : 'border-gray-300 dark:border-gray-700' }}">
+                                <div class="relative border rounded-lg p-4 cursor-pointer hover:border-emerald-500 transition-colors {{ old('plan') == 'basic' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'border-gray-300 dark:border-gray-700' }}">
                                     <input type="radio" name="plan" id="plan_basic" value="basic" class="absolute h-4 w-4 top-4 right-4" {{ old('plan', 'basic') == 'basic' ? 'checked' : '' }} required>
                                     <label for="plan_basic" class="block cursor-pointer">
                                         <div class="font-medium text-gray-900 dark:text-white mb-1">Basic Plan</div>
@@ -94,7 +94,7 @@
                                         </div>
                                     </label>
                                 </div>
-                                <div class="relative border rounded-lg p-4 cursor-pointer hover:border-indigo-500 transition-colors {{ old('plan') == 'premium' ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30' : 'border-gray-300 dark:border-gray-700' }}">
+                                <div class="relative border rounded-lg p-4 cursor-pointer hover:border-emerald-500 transition-colors {{ old('plan') == 'premium' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'border-gray-300 dark:border-gray-700' }}">
                                     <input type="radio" name="plan" id="plan_premium" value="premium" class="absolute h-4 w-4 top-4 right-4" {{ old('plan') == 'premium' ? 'checked' : '' }} required>
                                     <label for="plan_premium" class="block cursor-pointer">
                                         <div class="font-medium text-gray-900 dark:text-white mb-1">Premium Plan</div>
@@ -118,7 +118,7 @@
                         <div class="mb-6">
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">
-                                    <input id="send_credentials" name="send_credentials" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" {{ old('send_credentials') ? 'checked' : '' }}>
+                                    <input id="send_credentials" name="send_credentials" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500" {{ old('send_credentials') ? 'checked' : '' }}>
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="send_credentials" class="font-medium text-gray-700 dark:text-gray-300">Send login credentials by email</label>
@@ -130,7 +130,7 @@
                         <!-- Assign to Subjects -->
                         <div class="mb-6">
                             <label for="subject_ids" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Assign to Subjects (Optional)</label>
-                            <select name="subject_ids[]" id="subject_ids" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" multiple>
+                            <select name="subject_ids[]" id="subject_ids" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" multiple>
                                 @foreach(\App\Models\Subject::where('user_id', auth()->id())->orderBy('name')->get() as $subject)
                                     <option value="{{ $subject->id }}" {{ in_array($subject->id, old('subject_ids', [])) ? 'selected' : '' }}>{{ $subject->name }}</option>
                                 @endforeach

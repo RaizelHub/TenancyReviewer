@@ -3,6 +3,14 @@
 @endphp
 <x-tenant-app-layout>
     @push('styles')
+        <style>
+    .reviewer-dashboard { max-width: 80rem; margin: 0 auto; padding-bottom: 2rem; }
+    .reviewer-dashboard .dashboard-section > .section-header h3 { font-size: .875rem; font-weight: 700; letter-spacing: .01em; color: #111827; }
+    .reviewer-dashboard .dashboard-section > .section-header { margin-bottom: 1rem; }
+    .reviewer-dashboard .stat-card { min-height: 104px; }
+</style>
+    @endpush
+    @push('styles')
         <link rel="stylesheet" href="{{ asset('css/dashboard-customizer.css') }}">
     @endpush
 
@@ -17,35 +25,35 @@
                 {{ __('Classroom Dashboard') }}
             </h2>
             <div class="flex space-x-2">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-50 text-emerald-700 dark:bg-indigo-900/30 dark:text-indigo-300">
                     <i class="fas fa-calendar-alt mr-1.5 customizable-icon" data-icon-id="calendar-icon"></i> {{ now()->format('F j, Y') }}
                 </span>
             </div>
         </div>
     </x-slot>
 
-    <div class="h-[calc(100vh-4rem)] overflow-hidden">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full overflow-y-auto pb-4 dashboard-container">
+    <div class="reviewer-dashboard">
+        <div class="dashboard-container">
             <!-- Welcome Banner -->
-            <div class="animated-gradient rounded-xl shadow-lg mb-6 overflow-hidden dashboard-section" data-section-id="welcome-banner">
-                <div class="section-header px-6 py-6 md:px-8 md:py-8 bg-black/20">
+            <div class="rounded-2xl border border-emerald-800 bg-emerald-700 shadow-sm mb-6 overflow-hidden dashboard-section" data-section-id="welcome-banner">
+                <div class="section-header px-6 py-6 md:px-8 md:py-8">
                     <div class="max-w-3xl">
                         <h2 class="text-xl md:text-2xl font-bold text-white mb-2">Welcome to Your Classroom</h2>
                         <p class="text-white/80 mb-4 text-sm md:text-base">Manage your subjects, students, and activities all in one place.</p>
                         <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('subjects.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white/90 backdrop-blur-sm text-indigo-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
+                            <a href="{{ route('subjects.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white text-emerald-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
                                 <i class="fas fa-book mr-1.5 customizable-icon" data-icon-id="subjects-icon"></i>
                                 Subjects
                             </a>
-                            <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-white/90 backdrop-blur-sm text-indigo-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
+                            <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-white text-emerald-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
                                 <i class="fas fa-plus mr-1.5 customizable-icon" data-icon-id="new-subject-icon"></i>
                                 New Subject
                             </a>
-                            <a href="{{ route('students.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white/90 backdrop-blur-sm text-green-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
+                            <a href="{{ route('students.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white text-green-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
                                 <i class="fas fa-user-graduate mr-1.5 customizable-icon" data-icon-id="students-icon"></i>
                                 Students
                             </a>
-                            <a href="{{ route('activities.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white/90 backdrop-blur-sm text-purple-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
+                            <a href="{{ route('activities.index') }}" class="inline-flex items-center px-3 py-1.5 bg-white text-emerald-600 rounded-lg text-sm font-medium hover:bg-white transition-colors shadow-sm">
                                 <i class="fas fa-tasks mr-1.5 customizable-icon" data-icon-id="activities-icon"></i>
                                 Activities
                             </a>
@@ -76,14 +84,14 @@
                     <!-- Subject Stats -->
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
                         <div class="flex items-center">
-                            <div class="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 mr-3">
+                            <div class="p-2 rounded-lg bg-emerald-50 dark:bg-indigo-900/30 text-emerald-600 dark:text-indigo-400 mr-3">
                                 <i class="fas fa-book customizable-icon" data-icon-id="subject-stats-icon"></i>
                             </div>
                             <div>
                                 <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Subjects</p>
                                 <div class="flex items-end">
                                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ $subjectCount }}</h3>
-                                    <a href="{{ route('subjects.index') }}" class="ml-2 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 text-xs">
+                                    <a href="{{ route('subjects.index') }}" class="ml-2 text-emerald-600 hover:text-emerald-800 dark:text-indigo-400 text-xs">
                                         <i class="fas fa-arrow-right customizable-icon" data-icon-id="subject-arrow-icon"></i>
                                     </a>
                                 </div>
@@ -112,14 +120,14 @@
                     <!-- Activity Stats -->
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
                         <div class="flex items-center">
-                            <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mr-3">
+                            <div class="p-2 rounded-lg bg-emerald-50 dark:bg-purple-900/30 text-emerald-600 dark:text-purple-400 mr-3">
                                 <i class="fas fa-tasks customizable-icon" data-icon-id="activity-stats-icon"></i>
                             </div>
                             <div>
                                 <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Activities</p>
                                 <div class="flex items-end">
                                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ $activityCount }}</h3>
-                                    <a href="{{ route('activities.index') }}" class="ml-2 text-purple-600 hover:text-purple-800 dark:text-purple-400 text-xs">
+                                    <a href="{{ route('activities.index') }}" class="ml-2 text-emerald-600 hover:text-emerald-700 dark:text-purple-400 text-xs">
                                         <i class="fas fa-arrow-right customizable-icon" data-icon-id="activity-arrow-icon"></i>
                                     </a>
                                 </div>
@@ -151,7 +159,7 @@
             <div class="dashboard-section mb-6" data-section-id="recent-subjects">
                 <div class="section-header flex justify-between items-center mb-3">
                     <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">Recent Subjects</h3>
-                    <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-xs shadow-sm">
+                    <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-xs shadow-sm">
                         <i class="fas fa-plus mr-1.5 customizable-icon" data-icon-id="add-subject-icon"></i>
                         Add Subject
                     </a>
@@ -185,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="flex space-x-1">
-                                    <a href="{{ route('subjects.show', $subject->id) }}" class="flex-1 inline-flex items-center justify-center px-2 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-xs shadow-sm">
+                                    <a href="{{ route('subjects.show', $subject->id) }}" class="flex-1 inline-flex items-center justify-center px-2 py-1 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-xs shadow-sm">
                                         <i class="fas fa-eye mr-1 customizable-icon" data-icon-id="view-subject-icon-{{ $subject->id }}"></i>
                                         View
                                     </a>
@@ -198,13 +206,13 @@
                         </div>
                     @empty
                         <div class="col-span-full bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 text-center border border-gray-100 dark:border-gray-700">
-                            <div class="w-10 h-10 mx-auto bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-2">
-                                <i class="fas fa-book text-indigo-600 dark:text-indigo-400 customizable-icon" data-icon-id="no-subjects-icon"></i>
+                            <div class="w-10 h-10 mx-auto bg-emerald-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-2">
+                                <i class="fas fa-book text-emerald-600 dark:text-indigo-400 customizable-icon" data-icon-id="no-subjects-icon"></i>
                             </div>
                             <h3 class="text-sm font-medium text-gray-900 dark:text-white">No subjects yet</h3>
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 max-w-md mx-auto">Get started by creating your first subject.</p>
                             <div class="mt-3">
-                                <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm text-xs">
+                                <a href="{{ route('subjects.create') }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm text-xs">
                                     <i class="fas fa-plus mr-1.5 customizable-icon" data-icon-id="create-subject-icon"></i>
                                     Create Subject
                                 </a>
@@ -219,7 +227,7 @@
                 <div class="section-header flex justify-between items-center mb-3">
                     <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">Recent Activities</h3>
                     <div class="flex space-x-2">
-                        <a href="{{ route('activities.create') }}" class="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-xs shadow-sm">
+                        <a href="{{ route('activities.create') }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-xs shadow-sm">
                             <i class="fas fa-plus mr-1.5 customizable-icon" data-icon-id="add-activity-icon"></i>
                             Add
                         </a>
@@ -256,7 +264,7 @@
                                                 </span>
                                             </div>
                                             <div class="mt-1 flex items-center flex-wrap gap-1">
-                                                <span class="inline-flex items-center text-xs bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 px-1.5 py-0.5 rounded-full">
+                                                <span class="inline-flex items-center text-xs bg-emerald-50 dark:bg-indigo-900/30 text-emerald-700 dark:text-indigo-300 px-1.5 py-0.5 rounded-full">
                                                     {{ $activity->subject->name }}
                                                 </span>
                                                 <span class="inline-flex items-center text-xs bg-{{ $activity->type === 'assignment' ? 'purple' : 'green' }}-100 dark:bg-{{ $activity->type === 'assignment' ? 'purple' : 'green' }}-900/30 text-{{ $activity->type === 'assignment' ? 'purple' : 'green' }}-800 dark:text-{{ $activity->type === 'assignment' ? 'purple' : 'green' }}-300 px-1.5 py-0.5 rounded-full">
@@ -273,13 +281,13 @@
                         </ul>
                     @else
                         <div class="p-4 text-center">
-                            <div class="w-10 h-10 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mb-2">
-                                <i class="fas fa-tasks text-purple-600 dark:text-purple-400 customizable-icon" data-icon-id="no-activities-icon"></i>
+                            <div class="w-10 h-10 mx-auto bg-emerald-50 dark:bg-purple-900/30 rounded-full flex items-center justify-center mb-2">
+                                <i class="fas fa-tasks text-emerald-600 dark:text-purple-400 customizable-icon" data-icon-id="no-activities-icon"></i>
                             </div>
                             <h3 class="text-sm font-medium text-gray-900 dark:text-white">No activities yet</h3>
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 max-w-md mx-auto">Create activities for your subjects.</p>
                             <div class="mt-3">
-                                <a href="{{ route('activities.create') }}" class="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm text-xs">
+                                <a href="{{ route('activities.create') }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm text-xs">
                                     <i class="fas fa-plus mr-1.5 customizable-icon" data-icon-id="create-activity-icon"></i>
                                     Create Activity
                                 </a>
@@ -298,7 +306,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <!-- Create Subject -->
                     <a href="{{ route('subjects.create') }}" class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 hover:shadow-md transition-all border border-gray-100 dark:border-gray-700 flex items-center text-center group">
-                        <div class="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 mr-3 group-hover:scale-110 transition-transform">
+                        <div class="p-2 rounded-lg bg-emerald-50 dark:bg-indigo-900/30 text-emerald-600 dark:text-indigo-400 mr-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-book customizable-icon" data-icon-id="quick-subject-icon"></i>
                         </div>
                         <div class="text-left">
@@ -318,7 +326,7 @@
 
                     <!-- Create Activity -->
                     <a href="{{ route('activities.create') }}" class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 hover:shadow-md transition-all border border-gray-100 dark:border-gray-700 flex items-center text-center group">
-                        <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mr-3 group-hover:scale-110 transition-transform">
+                        <div class="p-2 rounded-lg bg-emerald-50 dark:bg-purple-900/30 text-emerald-600 dark:text-purple-400 mr-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-tasks customizable-icon" data-icon-id="quick-activity-icon"></i>
                         </div>
                         <div class="text-left">
@@ -426,7 +434,7 @@
 
     <!-- Customization Controls -->
     <div class="fixed bottom-4 right-4 z-50 flex space-x-2">
-        <button id="toggleCustomizeMode" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center">
+        <button id="toggleCustomizeMode" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center">
             <i class="fas fa-paint-brush mr-2"></i>
             <span>Customize</span>
         </button>

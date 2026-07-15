@@ -117,11 +117,20 @@ class QuizController extends Controller
         }
 
         // Create a new attempt
-        $attempt = QuizAttempt::create([
-            'quiz_id' => $quiz->id,
-            'student_id' => $student->id,
-            'started_at' => now(),
-        ]);
+        if (request('practice') == 1) {
+            $attempt = new QuizAttempt([
+                'quiz_id' => $quiz->id,
+                'student_id' => $student->id,
+                'started_at' => now(),
+            ]);
+            $attempt->id = 0; // Signal practice mode
+        } else {
+            $attempt = QuizAttempt::create([
+                'quiz_id' => $quiz->id,
+                'student_id' => $student->id,
+                'started_at' => now(),
+            ]);
+        }
 
         // Load questions in random order if specified
         $questions = $quiz->questions()

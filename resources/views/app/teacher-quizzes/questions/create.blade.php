@@ -4,7 +4,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-800">Add Question</h1>
                 <a href="{{ route('teacher-quizzes.show', $quiz) }}"
-                   class="text-indigo-600 hover:text-indigo-800">
+                   class="text-emerald-600 hover:text-emerald-800">
                     <i class="fas fa-arrow-left mr-2"></i>Back to Quiz
                 </a>
             </div>
@@ -16,7 +16,7 @@
                     <div class="mb-6">
                         <label for="type" class="block text-sm font-medium text-gray-700 mb-2">Question Type</label>
                         <select name="type" id="type"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                 required>
                             <option value="">Select a type</option>
                             <option value="multiple_choice" {{ old('type') == 'multiple_choice' ? 'selected' : '' }}>Multiple Choice</option>
@@ -31,7 +31,7 @@
                     <div class="mb-6">
                         <label for="question" class="block text-sm font-medium text-gray-700 mb-2">Question Text</label>
                         <textarea name="question" id="question" rows="3"
-                                  class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                  class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                   required>{{ old('question') }}</textarea>
                         @error('question')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -41,7 +41,7 @@
                     <div class="mb-6">
                         <label for="points" class="block text-sm font-medium text-gray-700 mb-2">Points</label>
                         <input type="number" name="points" id="points" min="1" max="100"
-                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                value="{{ old('points', 1) }}" required>
                         @error('points')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -55,11 +55,11 @@
                                 @foreach(old('options') as $i => $option)
                                     <div class="flex items-center space-x-4">
                                         <input type="text" name="options[]"
-                                               class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                               class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                                placeholder="Option {{ $i + 1 }}" value="{{ $option }}">
                                         <div class="flex items-center">
                                             <input type="radio" name="correct_option" value="{{ $i }}"
-                                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                                                   class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
                                                    {{ old('correct_option') == $i ? 'checked' : '' }}>
                                             <label class="ml-2 text-sm text-gray-700">Correct</label>
                                         </div>
@@ -74,11 +74,11 @@
                                 @for($i = 0; $i < 2; $i++)
                                     <div class="flex items-center space-x-4">
                                         <input type="text" name="options[]"
-                                               class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                               class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                                placeholder="Option {{ $i + 1 }}" value="">
                                         <div class="flex items-center">
                                             <input type="radio" name="correct_option" value="{{ $i }}"
-                                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                                                   class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
                                                    {{ $i == 0 ? 'checked' : '' }}>
                                             <label class="ml-2 text-sm text-gray-700">Correct</label>
                                         </div>
@@ -86,7 +86,7 @@
                                 @endfor
                             @endif
                         </div>
-                        <button type="button" id="addOption" class="mt-2 text-sm text-indigo-600 hover:text-indigo-800">
+                        <button type="button" id="addOption" class="mt-2 text-sm text-emerald-600 hover:text-emerald-800">
                             <i class="fas fa-plus mr-1"></i> Add Option
                         </button>
                         @error('options')
@@ -102,13 +102,13 @@
                         <div class="space-y-4">
                             <div class="flex items-center space-x-4">
                                 <input type="radio" name="correct_answer" value="true"
-                                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                                       class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
                                        {{ old('correct_answer') == 'true' ? 'checked' : '' }}>
                                 <label class="text-sm text-gray-700">True</label>
                             </div>
                             <div class="flex items-center space-x-4">
                                 <input type="radio" name="correct_answer" value="false"
-                                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                                       class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
                                        {{ old('correct_answer') == 'false' ? 'checked' : '' }}>
                                 <label class="text-sm text-gray-700">False</label>
                             </div>
@@ -121,7 +121,7 @@
                     <div id="short_answer_options" class="mb-6 hidden">
                         <label for="correct_answer" class="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
                         <input type="text" name="correct_answer" id="correct_answer"
-                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                value="{{ old('correct_answer') }}">
                         @error('correct_answer')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -132,7 +132,7 @@
                     <div class="mb-6">
                         <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Question Order</label>
                         <input type="number" name="order" id="order" min="1"
-                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                                value="{{ old('order', $nextOrder ?? 1) }}" required>
                         @error('order')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -143,7 +143,7 @@
                     <div class="mb-6">
                         <label for="explanation" class="block text-sm font-medium text-gray-700 mb-2">Explanation (Optional)</label>
                         <textarea name="explanation" id="explanation" rows="2"
-                                  class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('explanation') }}</textarea>
+                                  class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">{{ old('explanation') }}</textarea>
                         <p class="mt-1 text-sm text-gray-500">Provide an explanation that will be shown to students after they answer.</p>
                         @error('explanation')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -154,7 +154,7 @@
                         <button type="submit" name="add_another" value="1" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
                             Add & Create Another
                         </button>
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">
+                        <button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 transition-colors">
                             Add Question
                         </button>
                     </div>

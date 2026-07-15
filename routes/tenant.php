@@ -10,7 +10,10 @@ use App\Http\Controllers\App\ActivityController;
 use App\Http\Controllers\App\SubmissionController;
 use App\Http\Controllers\App\StudentSubscriptionController;
 use App\Http\Controllers\App\ChatController;
+use App\Http\Controllers\App\PaymentController;
 use App\Http\Controllers\App\StudentChatController;
+use App\Http\Controllers\App\TenantDashboardController;
+use App\Http\Controllers\App\StudentDashboardController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Illuminate\Support\Facades\Auth;
@@ -100,125 +103,26 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function (){
-        return view('app.welcome');
-    });
+    Route::get('/', [TenantDashboardController::class, 'welcome'])->name('tenant.welcome');
 
-    Route::get('/dashboard', function () {
-        return view('app.dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [TenantDashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('tenant.dashboard');
 
-
-    Route::get('/student/dashboard', function () {
-        $student = Auth::guard('student')->user();
-        $subjects = $student ? $student->subjects()->with(['activities', 'user'])->get() : [];
-        return view('app.student-dashboard', compact('subjects'));
-    })->middleware(['auth:student'])->name('student.dashboard');
+    Route::get('/student/dashboard', [StudentDashboardController::class, 'dashboard'])->middleware(['auth:student'])->name('student.dashboard');
 
     // Student's My Subjects route
-    Route::get('/my-subjects', function () {
-        $student = Auth::guard('student')->user();
-        $subjects = $student ? $student->subjects()->with(['activities', 'user'])->get() : [];
-        return view('app.my-subjects', compact('subjects'));
-    })->middleware(['auth:student'])->name('student.subjects');
+    Route::get('/my-subjects', [StudentDashboardController::class, 'subjects'])->middleware(['auth:student'])->name('student.subjects');
 
     // Student's Subject Details route
-    Route::get('/my-subjects/{subject}', function (\App\Models\Subject $subject) {
-        $student = Auth::guard('student')->user();
-
-        // Check if the student is enrolled in this subject
-        if (!$student->subjects()->where('subjects.id', $subject->id)->exists()) {
-            return redirect()->route('student.subjects')->with('error', 'You are not enrolled in this subject.');
-        }
-
-        // Load the subject with its teacher, activities, and classmates
-        $subject->load(['user', 'activities.quiz']);
-        $classmates = $subject->students()->where('students.id', '!=', $student->id)->get();
-
-        // Calculate the final grade for this subject
-        $gradeData = $student->calculateFinalGradeForSubject($subject->id);
-
-        return view('app.my-subject-details', compact('subject', 'classmates', 'student', 'gradeData'));
-    })->middleware(['auth:student'])->name('student.subject.show');
+    Route::get('/my-subjects/{subject}', [StudentDashboardController::class, 'subjectShow'])->middleware(['auth:student'])->name('student.subject.show');
 
     // Student's Assignments route
-    Route::get('/my-assignments', function () {
-        if (!Auth::guard('student')->check()) {
-            return redirect()->route('student.login');
-        }
-
-        $student = Auth::guard('student')->user();
-        $submissions = $student->submissions()->with('activity')->get();
-
-        // Use the Submission model for the query
-        $activeActivities = $student->subjects()
-            ->with(['activities' => function($query) use ($student) {
-                $query->where('due_date', '>', now())
-                    ->whereDoesntHave('submissions', function($q) use ($student) {
-                        $q->where('student_id', $student->id);
-                    });
-            }])
-            ->get()
-            ->pluck('activities')
-            ->flatten();
-
-        // Get activities that have submissions but are not graded yet
-        $pendingGradedActivities = $student->subjects()
-            ->with(['activities' => function($query) use ($student) {
-                $query->whereHas('submissions', function($q) use ($student) {
-                    $q->where('student_id', $student->id)
-                      ->whereNull('grade');
-                });
-            }])
-            ->get()
-            ->pluck('activities')
-            ->flatten();
-
-        // Merge the active activities with pending graded activities
-        $activeActivities = $activeActivities->merge($pendingGradedActivities)->unique('id');
-
-        return view('app.my-assignments', compact('submissions', 'activeActivities'));
-    })->middleware(['auth:student'])->name('student.assignments');
+    Route::get('/my-assignments', [StudentDashboardController::class, 'assignments'])->middleware(['auth:student'])->name('student.assignments');
 
     // Student's Materials route
-    Route::get('/my-materials', function () {
-        if (!Auth::guard('student')->check()) {
-            return redirect()->route('student.login');
-        }
-
-        $student = Auth::guard('student')->user();
-        $materials = $student->subjects()
-            ->with(['activities' => function($query) {
-                $query->where('type', 'material')
-                      ->where('is_published', true)
-                      ->whereNotNull('attachment'); // Only get materials with attachments
-            }])
-            ->get()
-            ->pluck('activities')
-            ->flatten();
-
-        return view('app.my-materials', compact('materials', 'student'));
-    })->middleware(['auth:student'])->name('student.materials');
+    Route::get('/my-materials', [StudentDashboardController::class, 'materials'])->middleware(['auth:student'])->name('student.materials');
 
     // Student's Announcements route
-    Route::get('/my-announcements', function () {
-        if (!Auth::guard('student')->check()) {
-            return redirect()->route('student.login');
-        }
-
-        $student = Auth::guard('student')->user();
-        $announcements = $student->subjects()
-            ->with(['activities' => function($query) {
-                $query->where('type', 'announcement')
-                      ->where('is_published', true)
-                      ->orderBy('created_at', 'desc');
-            }])
-            ->get()
-            ->pluck('activities')
-            ->flatten();
-
-        return view('app.my-announcements', compact('announcements'));
-    })->middleware(['auth:student'])->name('student.announcements');
+    Route::get('/my-announcements', [StudentDashboardController::class, 'announcements'])->middleware(['auth:student'])->name('student.announcements');
 
     // Quiz routes
     Route::prefix('quizzes')->middleware(['auth:student'])->group(function () {
@@ -259,8 +163,8 @@ Route::middleware([
 
     // Student Profile routes
     Route::middleware('auth:student')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('student.profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('student.profile.update');
     });
 
     // Student settings/profile
@@ -295,6 +199,7 @@ Route::middleware([
     Route::middleware('auth')->group(function () {
         // Subscription Plan
         Route::get('/subscription/plan', [\App\Http\Controllers\App\SubscriptionPlanController::class, 'index'])->name('subscription.plan');
+        Route::get('/subscription/checkout', [PaymentController::class, 'checkout'])->name('subscription.checkout');
         Route::post('/subscription/change-plan', [\App\Http\Controllers\App\SubscriptionPlanController::class, 'changePlan'])->name('subscription.change-plan');
 
         // Subjects
@@ -302,6 +207,7 @@ Route::middleware([
         Route::post('/subjects/{subject}/students', [SubjectController::class, 'addStudents'])->name('subjects.students.add');
         Route::delete('/subjects/{subject}/students/{student}', [SubjectController::class, 'removeStudent'])->name('subjects.students.remove');
         Route::get('/subjects/{subject}/grade-report', [\App\Http\Controllers\App\GradeReportController::class, 'generateReport'])->name('subjects.grade-report');
+        Route::get('/subjects/{subject}/export-grades', [\App\Http\Controllers\App\GradeReportController::class, 'exportGrades'])->name('subjects.export-grades');
 
         // Students
         Route::resource('students', StudentController::class);

@@ -24,7 +24,7 @@
                         <!-- Subject -->
                         <div class="mb-4">
                             <label for="subject_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
-                            <select name="subject_id" id="subject_id" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <select name="subject_id" id="subject_id" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                                 <option value="">Select a Subject</option>
                                 @foreach(\App\Models\Subject::where('user_id', auth()->id())->orderBy('name')->get() as $subject)
                                     <option value="{{ $subject->id }}" {{ old('subject_id', $activity->subject_id) == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
@@ -38,7 +38,7 @@
                         <!-- Title -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
-                            <input type="text" name="title" id="title" value="{{ old('title', $activity->title) }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="text" name="title" id="title" value="{{ old('title', $activity->title) }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                             @error('title')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -47,13 +47,13 @@
                         <!-- Type -->
                         <div class="mb-4">
                             <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Activity Type</label>
-                            <select name="type" id="type" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <select name="type" id="type" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                                 <option value="assignment" {{ old('type', $activity->type) == 'assignment' ? 'selected' : '' }}>Assignment</option>
                                 <option value="material" {{ old('type', $activity->type) == 'material' ? 'selected' : '' }}>Material</option>
                                 <option value="announcement" {{ old('type', $activity->type) == 'announcement' ? 'selected' : '' }}>Announcement</option>
                             </select>
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                                <span class="font-medium text-indigo-600 dark:text-indigo-400">Assignment:</span> Students can submit work for grading
+                                <span class="font-medium text-emerald-600 dark:text-emerald-400">Assignment:</span> Students can submit work for grading
                                 <br>
                                 <span class="font-medium text-green-600 dark:text-green-400">Material:</span> Learning resources with no submission required
                                 <br>
@@ -67,7 +67,7 @@
                         <!-- Description -->
                         <div class="mb-4">
                             <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('description', $activity->description) }}</textarea>
+                            <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">{{ old('description', $activity->description) }}</textarea>
                             @error('description')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -76,7 +76,7 @@
                         <!-- Points (for assignments and questions) -->
                         <div class="mb-4" id="pointsField">
                             <label for="points" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Points (Optional)</label>
-                            <input type="number" name="points" id="points" value="{{ old('points', $activity->points) }}" min="0" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                            <input type="number" name="points" id="points" value="{{ old('points', $activity->points) }}" min="0" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
                             @error('points')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -85,7 +85,7 @@
                         <!-- Due Date (for assignments) -->
                         <div class="mb-4" id="dueDateField">
                             <label for="due_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Due Date (Optional)</label>
-                            <input type="datetime-local" name="due_date" id="due_date" value="{{ old('due_date', $activity->due_date ? $activity->due_date->format('Y-m-d\TH:i') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                            <input type="datetime-local" name="due_date" id="due_date" value="{{ old('due_date', $activity->due_date ? $activity->due_date->format('Y-m-d\TH:i') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
                             @error('due_date')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -119,7 +119,7 @@
                         <!-- Published Status -->
                         <div class="mb-6">
                             <div class="flex items-center">
-                                <input type="checkbox" name="is_published" id="is_published" value="1" {{ old('is_published', $activity->is_published) ? 'checked' : '' }} class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <input type="checkbox" name="is_published" id="is_published" value="1" {{ old('is_published', $activity->is_published) ? 'checked' : '' }} class="rounded border-gray-300 text-emerald-600 shadow-sm focus:border-emerald-300 focus:ring focus:ring-emerald-200 focus:ring-opacity-50">
                                 <label for="is_published" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">Published</label>
                             </div>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">If unchecked, the activity will be saved as a draft.</p>
@@ -129,7 +129,7 @@
                             <button type="button" onclick="confirmDelete()" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Delete Activity
                             </button>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 focus:bg-emerald-700 active:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Update Activity
                             </button>
                         </div>

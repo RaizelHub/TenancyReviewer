@@ -8,7 +8,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     {{ $student->name }}
                 </h2>
-                <span class="ml-3 text-sm {{ $student->plan == 'premium' ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }} px-2.5 py-1 rounded-full shadow-sm">
+                <span class="ml-3 text-sm {{ $student->plan == 'premium' ? 'bg-emerald-600 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }} px-2.5 py-1 rounded-full shadow-sm">
                     @if($student->plan == 'premium')
                         <i class="fas fa-crown text-amber-300 mr-1"></i>
                     @endif
@@ -75,7 +75,7 @@
                                         <div>
                                             <span class="text-sm text-gray-500 dark:text-gray-400 block">Plan</span>
                                             <span class="text-sm font-medium text-gray-900 dark:text-white">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $student->plan == 'premium' ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }}">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $student->plan == 'premium' ? 'bg-emerald-600 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }}">
                                                     @if($student->plan == 'premium')
                                                         <i class="fas fa-crown text-amber-300 mr-1"></i>
                                                     @endif
@@ -104,7 +104,7 @@
                                     </div>
                                     @if($student->notes)
                                         <div class="flex items-start pt-2">
-                                            <div class="w-8 h-8 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-500 dark:text-purple-400 mr-3 mt-0.5">
+                                            <div class="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-500 dark:text-emerald-400 mr-3 mt-0.5">
                                                 <i class="fas fa-sticky-note"></i>
                                             </div>
                                             <div>
@@ -142,7 +142,7 @@
                                     <i class="fas fa-book text-blue-500 dark:text-blue-400 mr-2"></i>
                                     Enrolled Subjects
                                 </h3>
-                                <button type="button" onclick="document.getElementById('addSubjectsModal').classList.remove('hidden')" class="inline-flex items-center px-3.5 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow transition-all duration-200 text-sm">
+                                <button type="button" onclick="document.getElementById('addSubjectsModal').classList.remove('hidden')" class="inline-flex items-center px-3.5 py-2 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-lg hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow transition-all duration-200 text-sm">
                                     <i class="fas fa-plus mr-1.5"></i>
                                     Enroll in Subjects
                                 </button>
@@ -192,7 +192,7 @@
                                     <h3 class="mt-2 text-xl font-medium text-gray-900 dark:text-white">No subjects enrolled</h3>
                                     <p class="mt-2 text-gray-500 dark:text-gray-400 max-w-md mx-auto">Enroll this student in subjects to start managing their coursework and assignments.</p>
                                     <div class="mt-6">
-                                        <button type="button" onclick="document.getElementById('addSubjectsModal').classList.remove('hidden')" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow transition-all duration-200">
+                                        <button type="button" onclick="document.getElementById('addSubjectsModal').classList.remove('hidden')" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow transition-all duration-200">
                                             <i class="fas fa-plus mr-2"></i>
                                             Enroll in Subjects
                                         </button>
@@ -322,7 +322,7 @@
                         <button type="button" onclick="document.getElementById('addSubjectsModal').classList.add('hidden')" class="inline-flex items-center px-4 py-2.5 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg font-medium text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200">
                             Cancel
                         </button>
-                        <button type="submit" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow font-medium text-sm transition-all duration-200">
+                        <button type="submit" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-lg hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow font-medium text-sm transition-all duration-200">
                             <i class="fas fa-check mr-1.5"></i>
                             Enroll
                         </button>

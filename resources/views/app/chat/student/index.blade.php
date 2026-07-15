@@ -9,7 +9,7 @@
                     <div class="relative">
                         <input type="text" id="chat-search" placeholder="Search conversations..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
-                            focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                            focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                             bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-search text-gray-400 dark:text-gray-500"></i>
@@ -34,7 +34,7 @@
                         @if(!empty($subjectChannels))
                             <div class="mb-8">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                    <i class="fas fa-book-open mr-2 text-indigo-600 dark:text-indigo-400"></i>
+                                    <i class="fas fa-book-open mr-2 text-emerald-600 dark:text-emerald-400"></i>
                                     Subject Chats
                                 </h3>
 
@@ -42,7 +42,7 @@
                                     @foreach($subjectChannels as $subjectId => $subjectData)
                                         <div class="bg-gray-50 dark:bg-gray-750 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                                             <div class="flex items-center mb-3">
-                                                <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
+                                                <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3">
                                                     <i class="fas fa-book"></i>
                                                 </div>
                                                 <div>
@@ -61,12 +61,12 @@
                                                 @foreach($subjectData['channels'] as $channel)
                                                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:shadow
                                                         transition-all duration-200 overflow-hidden border border-gray-100 dark:border-gray-600
-                                                        hover:border-indigo-200 dark:hover:border-indigo-800 group p-3">
+                                                        hover:border-emerald-200 dark:hover:border-emerald-800 group p-3">
                                                         <div class="flex items-center">
                                                             <a href="{{ route('student.chat.show', $channel['channel_url']) }}" class="flex-1 flex items-center">
-                                                                <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30
-                                                                    flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3
-                                                                    group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/40 transition-colors duration-200">
+                                                                <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30
+                                                                    flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3
+                                                                    group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800/40 transition-colors duration-200">
                                                                     <i class="fas fa-comments text-sm"></i>
                                                                 </div>
                                                                 <div class="flex-1 min-w-0">
@@ -86,7 +86,7 @@
                                                                         @endif
                                                                     </div>
                                                                 </div>
-                                                                <div class="text-indigo-600 dark:text-indigo-400 ml-2">
+                                                                <div class="text-emerald-600 dark:text-emerald-400 ml-2">
                                                                     <i class="fas fa-chevron-right"></i>
                                                                 </div>
                                                             </a>
@@ -109,7 +109,7 @@
                         <!-- Other chats -->
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                <i class="fas fa-comments mr-2 text-indigo-600 dark:text-indigo-400"></i>
+                                <i class="fas fa-comments mr-2 text-emerald-600 dark:text-emerald-400"></i>
                                 Other Conversations
                             </h3>
 
@@ -126,7 +126,7 @@
                                             <div class="p-5">
                                                 <div class="flex items-center mb-3">
                                                     <a href="{{ route('student.chat.show', $channel['channel_url']) }}" class="flex-1 flex items-center">
-                                                        <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
+                                                        <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3">
                                                             <i class="fas fa-comments"></i>
                                                         </div>
                                                         <div>
@@ -155,7 +155,7 @@
                                                                 <p>No messages yet</p>
                                                             @endif
                                                         </div>
-                                                        <div class="text-indigo-600 dark:text-indigo-400">
+                                                        <div class="text-emerald-600 dark:text-emerald-400">
                                                             <i class="fas fa-chevron-right"></i>
                                                         </div>
                                                     </div>

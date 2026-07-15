@@ -6,10 +6,10 @@
                     Start a Chat for {{ $subject->name }}
                 </h2>
                 <div class="flex space-x-2">
-                    <a href="{{ route('subjects.show', $subject->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 focus:bg-gray-300 dark:focus:bg-gray-600 active:bg-gray-400 dark:active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    <a href="{{ route('subjects.show', $subject->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 focus:bg-gray-300 dark:focus:bg-gray-600 active:bg-gray-400 dark:active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         <i class="fas fa-arrow-left mr-2"></i> Back to Subject
                     </a>
-                    <a href="{{ route('chat.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 focus:bg-gray-300 dark:focus:bg-gray-600 active:bg-gray-400 dark:active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    <a href="{{ route('chat.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 focus:bg-gray-300 dark:focus:bg-gray-600 active:bg-gray-400 dark:active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         <i class="fas fa-comments mr-2"></i> All Chats
                     </a>
                 </div>
@@ -24,7 +24,7 @@
                             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Chat Name
                             </label>
-                            <input type="text" id="name" name="name" value="{{ old('name', $subject->name . ' Chat') }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Enter a name for this chat" required>
+                            <input type="text" id="name" name="name" value="{{ old('name', $subject->name . ' Chat') }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm" placeholder="Enter a name for this chat" required>
                             @error('name')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                             @enderror
@@ -40,7 +40,7 @@
                                     @foreach($students as $student)
                                         <div class="relative flex items-start">
                                             <div class="flex items-center h-5">
-                                                <input id="student_{{ $student->id }}" name="student_ids[]" value="{{ $student->id }}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                <input id="student_{{ $student->id }}" name="student_ids[]" value="{{ $student->id }}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
                                             </div>
                                             <div class="ml-3 text-sm">
                                                 <label for="student_{{ $student->id }}" class="font-medium text-gray-700 dark:text-gray-300">{{ $student->name }}</label>
@@ -51,11 +51,11 @@
                                 </div>
 
                                 <div class="mt-4 flex items-center">
-                                    <button type="button" id="select-all" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                    <button type="button" id="select-all" class="text-sm text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300">
                                         Select All
                                     </button>
                                     <span class="mx-2 text-gray-500">|</span>
-                                    <button type="button" id="deselect-all" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                    <button type="button" id="deselect-all" class="text-sm text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300">
                                         Deselect All
                                     </button>
                                 </div>
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="flex justify-end">
-                            <button type="submit" id="submit-button" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 opacity-50 cursor-not-allowed" disabled>
+                            <button type="submit" id="submit-button" class="inline-flex items-center px-4 py-2 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 focus:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150 opacity-50 cursor-not-allowed" disabled>
                                 <i class="fas fa-paper-plane mr-2"></i> Create Group Chat
                             </button>
                         </div>
@@ -118,11 +118,11 @@
                 if (selectedCount >= 3) {
                     submitButton.disabled = false;
                     submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                    submitButton.classList.add('hover:bg-indigo-700');
+                    submitButton.classList.add('hover:bg-emerald-700');
                 } else {
                     submitButton.disabled = true;
                     submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-                    submitButton.classList.remove('hover:bg-indigo-700');
+                    submitButton.classList.remove('hover:bg-emerald-700');
                 }
             }
 

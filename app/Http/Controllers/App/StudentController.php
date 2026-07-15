@@ -49,7 +49,7 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Student::orderBy('name');
+        $query = Student::withCount('subjects')->orderBy('name');
 
         // Apply search filter if provided
         if ($request->has('search') && !empty($request->search)) {

@@ -1,104 +1,13 @@
 <x-tenant-guest-layout>
-    <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back!</h1>
-        <p class="text-gray-600 dark:text-gray-400 mt-2">Sign in to your tenant account</p>
+    <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <div class="mb-8"><p class="text-sm font-medium text-emerald-700">Teacher and student access</p><h1 class="mt-2 text-2xl font-semibold tracking-tight text-gray-900">Welcome back</h1><p class="mt-2 text-sm leading-6 text-gray-500">Use the same account portal for teaching and learning.</p></div>
+        @if(session('status'))<div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{{ session('status') }}</div>@endif
+        <form method="POST" action="{{ route('login', [], false) }}" class="space-y-5">@csrf
+            <div><label for="email" class="app-label">Email address</label><input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="name@example.com" class="app-input @error('email') border-red-500 @enderror">@error('email')<p class="mt-2 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+            <div x-data="{ visible: false }"><div class="flex items-center justify-between"><label for="password" class="app-label">Password</label>@routeCheck('password.request')<a href="{{ route('password.request', [], false) }}" class="mb-1.5 text-sm font-medium text-emerald-700 hover:text-emerald-800">Forgot password?</a>@endrouteCheck</div><div class="relative"><input id="password" name="password" :type="visible ? 'text' : 'password'" required autocomplete="current-password" placeholder="Enter your password" class="app-input pr-11 @error('password') border-red-500 @enderror"><button type="button" @click="visible = !visible" class="absolute inset-y-0 right-0 px-3 text-gray-400 hover:text-emerald-700" aria-label="Show or hide password"><i class="fas" :class="visible ? 'fa-eye-slash' : 'fa-eye'"></i></button></div>@error('password')<p class="mt-2 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+            <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" name="remember" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-600">Remember this device</label>
+            <button type="submit" class="app-btn-primary w-full"><i class="fas fa-arrow-right-to-bracket"></i>Sign in to classroom</button>
+        </form>
     </div>
-
-    <!-- Session Status -->
-    @if (session('status'))
-        <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/30 border-l-4 border-[#4473be] text-[#4473be] dark:text-blue-300 rounded">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    <form method="POST" action="{{ route('login', [], false) }}" class="space-y-6">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                <span class="flex items-center">
-                    <i class="far fa-envelope text-[#4473be] mr-2"></i>
-                    {{ __('Email Address') }}
-                </span>
-            </label>
-            <div class="relative">
-                <input id="email"
-                    class="auth-input block w-full px-4 py-3 rounded-lg focus:outline-none @error('email') border-red-500 dark:border-red-500 @enderror"
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                    autocomplete="username"
-                    placeholder="name@example.com" />
-                @error('email')
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <i class="fas fa-exclamation-circle text-red-500"></i>
-                    </div>
-                @enderror
-            </div>
-            @error('email')
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <!-- Password -->
-        <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                <span class="flex items-center">
-                    <i class="far fa-lock text-[#4473be] mr-2"></i>
-                    {{ __('Password') }}
-                </span>
-            </label>
-            <div class="relative" x-data="{ showPassword: false }">
-                <input id="password"
-                    class="auth-input block w-full px-4 py-3 rounded-lg focus:outline-none @error('password') border-red-500 dark:border-red-500 @enderror"
-                    :type="showPassword ? 'text' : 'password'"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    placeholder="••••••••" />
-                <button type="button"
-                    @click="showPassword = !showPassword"
-                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-[#4473be] dark:hover:text-[#7da3e0] focus:outline-none">
-                    <i class="fas" :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-                </button>
-                @error('password')
-                    <div class="absolute inset-y-0 right-8 flex items-center pointer-events-none">
-                        <i class="fas fa-exclamation-circle text-red-500"></i>
-                    </div>
-                @enderror
-            </div>
-            @error('password')
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <!-- Remember Me & Forgot Password -->
-        <div class="flex items-center justify-between">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me"
-                    type="checkbox"
-                    class="rounded-sm border-gray-300 dark:border-gray-700 text-[#4473be] shadow-sm focus:ring-[#4473be] dark:focus:ring-[#4473be] dark:focus:ring-offset-gray-800"
-                    name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-
-            @routeCheck('password.request')
-                <a class="text-sm text-[#4473be] dark:text-[#7da3e0] hover:text-[#3a5fa0] dark:hover:text-[#6b91ce] transition-colors" href="{{ route('password.request', [], false) }}">
-                    {{ __('Forgot password?') }}
-                </a>
-            @endrouteCheck
-        </div>
-
-        <div>
-            <button type="submit" class="auth-button w-full py-3 px-4 rounded-lg text-white font-medium focus:outline-none focus:ring-4 focus:ring-[#4473be] focus:ring-opacity-25">
-                <span class="flex items-center justify-center">
-                    <i class="fas fa-sign-in-alt mr-2"></i>
-                    {{ __('Sign in') }}
-                </span>
-            </button>
-        </div>
-    </form>
 </x-tenant-guest-layout>
+ 

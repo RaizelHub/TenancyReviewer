@@ -4,7 +4,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-800">Questions for {{ $quiz->title }}</h1>
                 <a href="{{ route('teacher.quizzes.questions.create', $quiz) }}"
-                   class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">
+                   class="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Add Question
                 </a>
             </div>
@@ -38,7 +38,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="{{ route('teacher.quizzes.questions.edit', [$quiz, $question]) }}"
-                                           class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
+                                           class="text-emerald-600 hover:text-emerald-900 mr-4">Edit</a>
                                         <form action="{{ route('teacher.quizzes.questions.destroy', [$quiz, $question]) }}"
                                               method="POST" class="inline">
                                             @csrf

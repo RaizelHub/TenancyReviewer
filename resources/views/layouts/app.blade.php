@@ -19,37 +19,17 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            body {
-                font-family: 'Inter', sans-serif;
-            }
-
-            .animated-gradient {
-                background: linear-gradient(-45deg, #4f46e5, #7c3aed, #2563eb, #8b5cf6);
-                background-size: 400% 400%;
-                animation: gradient 15s ease infinite;
-            }
-
-            @keyframes gradient {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-            }
-
-            .gradient-text {
-                background: linear-gradient(to right, #4f46e5, #8b5cf6);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-            }
+            body { font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
+            .central-shell { color: #111827; }
+            .central-shell .app-surface { border-color: #e5e7eb; }
+            .central-shell table thead { background: #f8fafc; }
+            .central-shell table tbody tr { transition: background-color .15s ease; }
+            .central-shell table tbody tr:hover { background: #ecfdf5; }
         </style>
+
+        @stack('head')
     </head>
-    <body class="font-sans antialiased bg-gray-50 dark:bg-gray-900">
+    <body class="font-sans antialiased bg-slate-50">
         <x-layouts.navigation>
             <!-- Page Content -->
             @isset($header)

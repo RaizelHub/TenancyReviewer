@@ -84,12 +84,12 @@
                                         @if($activity->attachment)
                                             <div class="mt-3 mb-4">
                                                 @if(Auth::guard('student')->check())
-                                                    <a href="{{ route('activities.download-attachment', ['path' => $activity->attachment]) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-medium shadow-sm">
+                                                    <a href="{{ route('activities.download-attachment', ['path' => $activity->attachment]) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-lg hover:from-blue-700 hover:to-emerald-700 transition-all duration-200 text-sm font-medium shadow-sm">
                                                         <i class="fas fa-paperclip mr-1.5"></i>
                                                         Download Instructions
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('activities.download-attachment.tenant', ['path' => $activity->attachment]) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-medium shadow-sm">
+                                                    <a href="{{ route('activities.download-attachment.tenant', ['path' => $activity->attachment]) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-lg hover:from-blue-700 hover:to-emerald-700 transition-all duration-200 text-sm font-medium shadow-sm">
                                                         <i class="fas fa-paperclip mr-1.5"></i>
                                                         Download Instructions
                                                     </a>
@@ -238,7 +238,7 @@
                                             @endphp
 
                                             @if($isPdf || $isImage)
-                                                <button onclick="openFileViewer('{{ Storage::url($submission->file_path) }}', '{{ $isPdf ? 'pdf' : 'image' }}')" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-medium shadow-sm">
+                                                <button onclick="openFileViewer('{{ Storage::url($submission->file_path) }}', '{{ $isPdf ? 'pdf' : 'image' }}')" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-lg hover:from-blue-700 hover:to-emerald-700 transition-all duration-200 text-sm font-medium shadow-sm">
                                                     <i class="fas fa-eye mr-1.5"></i>
                                                     Preview
                                                 </button>

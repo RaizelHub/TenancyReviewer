@@ -1,3 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root { --rc-primary: #059669; --rc-primary-hover: #047857; --rc-primary-light: #d1fae5; --rc-sidebar: #064e3b; --rc-sidebar-hover: #065f46; --rc-border: #e5e7eb; }
+  html { @apply bg-slate-50; }
+  body { @apply bg-slate-50 text-gray-900 antialiased; font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
+  *, ::before, ::after { border-color: var(--rc-border); }
+  :focus-visible { outline: 2px solid var(--rc-primary); outline-offset: 2px; }
+  ::selection { @apply bg-emerald-100 text-emerald-950; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-gray-300; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+}
+
+@layer components {
+  .app-surface { @apply rounded-2xl border border-gray-200 bg-white shadow-sm; }
+  .app-page-header { @apply border-b border-gray-200 bg-white; }
+  .app-page-header > div { @apply py-5; }
+  .app-btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
+  .app-btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
+  .app-btn-danger { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2; }
+  .app-input { @apply block w-full rounded-xl border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-emerald-600 focus:ring-emerald-600; }
+  .app-label { @apply mb-1.5 block text-sm font-medium text-gray-700; }
+  .app-table-wrap { @apply overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm; }
+  .app-table { @apply min-w-full divide-y divide-gray-200 text-left text-sm; }
+  .app-table thead { @apply sticky top-0 z-10 bg-gray-50; }
+  .app-table th { @apply whitespace-nowrap px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-500; }
+  .app-table td { @apply px-5 py-4 text-gray-700; }
+  .app-table tbody tr { @apply border-b border-gray-100 transition-colors hover:bg-emerald-50/40; }
+  .app-table tbody tr:last-child { @apply border-b-0; }
+  .app-badge { @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium; }
+  .app-badge-success { @apply bg-emerald-50 text-emerald-700; }
+  .app-badge-warning { @apply bg-amber-50 text-amber-700; }
+  .app-badge-danger { @apply bg-red-50 text-red-700; }
+  .app-badge-info { @apply bg-sky-50 text-sky-700; }
+  main a:not(.app-btn-primary):not(.app-btn-secondary):not(.app-btn-danger) { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease; }
+  input:not([type='checkbox']):not([type='radio']), select, textarea { @apply rounded-xl border-gray-300 shadow-sm focus:border-emerald-600 focus:ring-emerald-600; }
+  button, [role='button'] { @apply transition-colors duration-150; }
+}

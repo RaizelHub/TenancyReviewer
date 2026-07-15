@@ -33,7 +33,7 @@
                         <!-- Title -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Quiz Title</label>
-                            <input type="text" name="title" id="title" value="{{ old('title', $quiz->title) }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="text" name="title" id="title" value="{{ old('title', $quiz->title) }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                             @error('title')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -42,7 +42,7 @@
                         <!-- Description -->
                         <div class="mb-4">
                             <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('description', $quiz->description) }}</textarea>
+                            <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">{{ old('description', $quiz->description) }}</textarea>
                             @error('description')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -51,7 +51,7 @@
                         <!-- Time Limit -->
                         <div class="mb-4">
                             <label for="time_limit" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Time Limit (minutes)</label>
-                            <input type="number" name="time_limit" id="time_limit" value="{{ old('time_limit', $quiz->time_limit) }}" min="1" max="180" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                            <input type="number" name="time_limit" id="time_limit" value="{{ old('time_limit', $quiz->time_limit) }}" min="1" max="180" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
                             @error('time_limit')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -63,7 +63,7 @@
                         <!-- Passing Score -->
                         <div class="mb-4">
                             <label for="passing_score" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Passing Score (%)</label>
-                            <input type="number" name="passing_score" id="passing_score" value="{{ old('passing_score', $quiz->passing_score) }}" min="1" max="100" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="number" name="passing_score" id="passing_score" value="{{ old('passing_score', $quiz->passing_score) }}" min="1" max="100" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" required>
                             @error('passing_score')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -72,15 +72,15 @@
                         <!-- Options -->
                         <div class="mb-6 space-y-4">
                             <div class="flex items-center">
-                                <input type="checkbox" name="is_published" id="is_published" value="1" {{ old('is_published', $quiz->is_published) ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <input type="checkbox" name="is_published" id="is_published" value="1" {{ old('is_published', $quiz->is_published) ? 'checked' : '' }} class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
                                 <label for="is_published" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">Publish quiz</label>
                             </div>
                             <div class="flex items-center">
-                                <input type="checkbox" name="show_results" id="show_results" value="1" {{ old('show_results', $quiz->show_results) ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <input type="checkbox" name="show_results" id="show_results" value="1" {{ old('show_results', $quiz->show_results) ? 'checked' : '' }} class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
                                 <label for="show_results" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">Show results to students immediately after completion</label>
                             </div>
                             <div class="flex items-center">
-                                <input type="checkbox" name="randomize_questions" id="randomize_questions" value="1" {{ old('randomize_questions', $quiz->randomize_questions) ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <input type="checkbox" name="randomize_questions" id="randomize_questions" value="1" {{ old('randomize_questions', $quiz->randomize_questions) ? 'checked' : '' }} class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
                                 <label for="randomize_questions" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">Randomize question order for each attempt</label>
                             </div>
                         </div>

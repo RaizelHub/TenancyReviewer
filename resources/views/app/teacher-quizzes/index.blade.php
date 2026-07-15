@@ -9,7 +9,7 @@
                     {{ __('Quiz Management') }}
                 </h2>
             </div>
-            <a href="{{ route('teacher-quizzes.create') }}" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow transition-all duration-200">
+            <a href="{{ route('teacher-quizzes.create') }}" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow transition-all duration-200">
                 <i class="fas fa-plus mr-2"></i>
                 Create New Quiz
             </a>
@@ -79,7 +79,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <span class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                     <i class="fas fa-list-ul mr-1"></i>
-                                                    {{ $quiz->questions->count() }} {{ Str::plural('question', $quiz->questions->count()) }}
+                                                    {{ $quiz->questions_count }} {{ Str::plural('question', $quiz->questions_count) }}
                                                 </span>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -138,7 +138,7 @@
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">No quizzes found</h3>
                             <p class="mt-2 text-gray-500 dark:text-gray-400 max-w-md mx-auto">Get started by creating your first quiz to test your students' knowledge.</p>
                             <div class="mt-6">
-                                <a href="{{ route('teacher-quizzes.create') }}" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow transition-all duration-200">
+                                <a href="{{ route('teacher-quizzes.create') }}" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow transition-all duration-200">
                                     <i class="fas fa-plus mr-2"></i>
                                     Create New Quiz
                                 </a>

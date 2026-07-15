@@ -5,7 +5,7 @@
                 Quiz Results
             </h2>
             <div class="flex items-center">
-                <span class="text-sm {{ Auth::guard('student')->user()->plan === 'premium' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }} px-3 py-1 rounded-full">
+                <span class="text-sm {{ Auth::guard('student')->user()->plan === 'premium' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800' }} px-3 py-1 rounded-full">
                     {{ ucfirst(Auth::guard('student')->user()->plan) }} Plan
                 </span>
             </div>
@@ -148,7 +148,7 @@
                     @endif
 
                     <div class="flex justify-center mt-6">
-                        <a href="{{ route('quizzes.start', $quiz->id) }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300">
+                        <a href="{{ route('quizzes.start', $quiz->id) }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-emerald-300">
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>

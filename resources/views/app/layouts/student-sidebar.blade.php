@@ -1,7 +1,7 @@
 @php
     use Illuminate\Support\Facades\Auth;
 @endphp
-<aside x-data="{ open: true, activeMenu: '{{ request()->route()->getName() }}' }" class="w-64 bg-white dark:bg-gray-800 shadow-md flex flex-col border-r border-gray-200 dark:border-gray-700 relative h-full">
+<aside x-data="{ open: window.innerWidth >= 768, activeMenu: '{{ request()->route()->getName() }}' }" class="app-sidebar shadow-md flex flex-col border-r border-gray-200 dark:border-gray-700 relative h-full transition-all duration-200" @toggle-sidebar.window="open = !open" :class="open ? 'w-64' : 'w-20'">
     <!-- Toggle Button -->
     <button @click="open = !open" class="absolute -right-3 top-20 bg-white dark:bg-gray-800 rounded-full p-1.5 shadow-md border border-gray-200 dark:border-gray-700 focus:outline-none z-10 transition-transform duration-300" :class="{'rotate-180': !open}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

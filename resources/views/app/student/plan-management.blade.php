@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div class="flex items-center">
-                <div class="p-2 rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400 mr-3">
+                <div class="p-2 rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 mr-3">
                     <i class="fas fa-crown"></i>
                 </div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -11,7 +11,7 @@
             </div>
             <div class="flex items-center">
                 @if($student->plan === 'premium')
-                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm">
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-emerald-600 to-emerald-600 text-white shadow-sm">
                         <i class="fas fa-crown text-amber-300 mr-1.5"></i> Premium Plan
                     </span>
                 @else
@@ -54,7 +54,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-xl border border-gray-100 dark:border-gray-700">
                 <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-750">
                     <div class="flex items-center">
-                        <div class="p-2 rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400 mr-3">
+                        <div class="p-2 rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 mr-3">
                             <i class="fas fa-cog"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Plan Settings</h3>
@@ -68,14 +68,14 @@
                                 <i class="fas fa-id-card text-blue-500 mr-2"></i> Your Current Plan
                             </h3>
 
-                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 border-2 {{ $student->plan === 'premium' ? 'border-purple-500 dark:border-purple-600' : 'border-blue-500 dark:border-blue-600' }} shadow-md relative overflow-hidden">
+                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 border-2 {{ $student->plan === 'premium' ? 'border-emerald-500 dark:border-emerald-600' : 'border-blue-500 dark:border-blue-600' }} shadow-md relative overflow-hidden">
                                 <!-- Decorative elements -->
                                 @if($student->plan === 'premium')
-                                    <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-purple-200 dark:bg-purple-800/30 rounded-full opacity-20"></div>
-                                    <div class="absolute bottom-0 left-0 w-24 h-24 -mb-8 -ml-8 bg-indigo-200 dark:bg-indigo-800/30 rounded-full opacity-20"></div>
+                                    <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-emerald-200 dark:bg-emerald-800/30 rounded-full opacity-20"></div>
+                                    <div class="absolute bottom-0 left-0 w-24 h-24 -mb-8 -ml-8 bg-emerald-200 dark:bg-emerald-800/30 rounded-full opacity-20"></div>
                                 @else
                                     <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-blue-200 dark:bg-blue-800/30 rounded-full opacity-20"></div>
-                                    <div class="absolute bottom-0 left-0 w-24 h-24 -mb-8 -ml-8 bg-indigo-200 dark:bg-indigo-800/30 rounded-full opacity-20"></div>
+                                    <div class="absolute bottom-0 left-0 w-24 h-24 -mb-8 -ml-8 bg-emerald-200 dark:bg-emerald-800/30 rounded-full opacity-20"></div>
                                 @endif
 
                                 <div class="relative">
@@ -114,7 +114,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium {{ $student->plan === 'premium' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }}">
+                                        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium {{ $student->plan === 'premium' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }}">
                                             {{ $student->plan === 'premium' ? '₱4,999/year' : 'Free' }}
                                         </span>
                                     </div>
@@ -165,7 +165,7 @@
 
                                     <div class="mt-6">
                                         @if($student->plan === 'basic')
-                                            <a href="{{ route('student.upgrade') }}" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-sm">
+                                            <a href="{{ route('student.upgrade') }}" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-600 text-white rounded-lg hover:from-emerald-700 hover:to-emerald-700 transition-all duration-200 shadow-sm">
                                                 <i class="fas fa-arrow-circle-up mr-2"></i>
                                                 Upgrade to Premium
                                             </a>
@@ -186,7 +186,7 @@
                         <!-- Plan Comparison -->
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                <i class="fas fa-exchange-alt text-purple-500 mr-2"></i> Plan Comparison
+                                <i class="fas fa-exchange-alt text-emerald-500 mr-2"></i> Plan Comparison
                             </h3>
 
                             <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
@@ -196,7 +196,7 @@
                                             <tr>
                                                 <th scope="col" class="px-6 py-3 rounded-tl-lg">Feature</th>
                                                 <th scope="col" class="px-6 py-3 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300">Basic</th>
-                                                <th scope="col" class="px-6 py-3 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-tr-lg">Premium</th>
+                                                <th scope="col" class="px-6 py-3 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-tr-lg">Premium</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -207,7 +207,7 @@
                                                 <td class="px-6 py-4 bg-blue-50/50 dark:bg-blue-900/10 font-medium text-blue-700 dark:text-blue-300">
                                                     Free
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10 font-medium text-purple-700 dark:text-purple-300">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10 font-medium text-emerald-700 dark:text-emerald-300">
                                                     ₱4,999/year
                                                 </td>
                                             </tr>
@@ -220,7 +220,7 @@
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10">
                                                     <div class="p-1 rounded-full bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 w-7 h-7 flex items-center justify-center">
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
@@ -235,7 +235,7 @@
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10">
                                                     <div class="p-1 rounded-full bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 w-7 h-7 flex items-center justify-center">
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
@@ -250,7 +250,7 @@
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10">
                                                     <div class="p-1 rounded-full bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 w-7 h-7 flex items-center justify-center">
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
@@ -265,7 +265,7 @@
                                                         <i class="fas fa-times text-xs"></i>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10">
                                                     <div class="p-1 rounded-full bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 w-7 h-7 flex items-center justify-center">
                                                         <i class="fas fa-check text-xs"></i>
                                                     </div>
@@ -278,13 +278,13 @@
                                                 <td class="px-6 py-4 bg-blue-50/50 dark:bg-blue-900/10">
                                                     <span class="text-xs text-gray-500 dark:text-gray-400">N/A</span>
                                                 </td>
-                                                <td class="px-6 py-4 bg-purple-50/50 dark:bg-purple-900/10 rounded-br-lg">
+                                                <td class="px-6 py-4 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-br-lg">
                                                     <div class="flex flex-wrap gap-1.5">
                                                         <span class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded">
                                                             <i class="fas fa-credit-card mr-1 text-blue-500"></i> Credit Card
                                                         </span>
                                                         <span class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded">
-                                                            <i class="fab fa-paypal mr-1 text-indigo-500"></i> PayPal
+                                                            <i class="fab fa-paypal mr-1 text-emerald-500"></i> PayPal
                                                         </span>
                                                         <span class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded">
                                                             <i class="fas fa-mobile-alt mr-1 text-green-500"></i> GCash

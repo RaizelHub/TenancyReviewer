@@ -28,7 +28,7 @@
                                 @foreach($messages as $message)
                                     <div class="mb-4 {{ $message['user']['user_id'] == $student->id ? 'ml-auto' : 'mr-auto' }} max-w-[80%]">
                                         <div class="flex {{ $message['user']['user_id'] == $student->id ? 'flex-row-reverse' : 'flex-row' }} items-start">
-                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 {{ $message['user']['user_id'] == $student->id ? 'ml-3' : 'mr-3' }}">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 {{ $message['user']['user_id'] == $student->id ? 'ml-3' : 'mr-3' }}">
                                                 @if(isset($message['user']['profile_url']) && $message['user']['profile_url'])
                                                     <img src="{{ $message['user']['profile_url'] }}" alt="{{ $message['user']['nickname'] }}" class="h-10 w-10 rounded-full">
                                                 @else
@@ -44,7 +44,7 @@
                                                         {{ \Carbon\Carbon::parse($message['created_at'])->format('M d, Y h:i A') }}
                                                     </span>
                                                 </div>
-                                                <div class="{{ $message['user']['user_id'] == $student->id ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200' }} px-4 py-2 rounded-lg">
+                                                <div class="{{ $message['user']['user_id'] == $student->id ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200' }} px-4 py-2 rounded-lg">
                                                     {{ $message['message'] }}
                                                 </div>
                                             </div>
@@ -62,7 +62,7 @@
                                 <div id="file-preview" class="hidden p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center">
-                                            <i class="fas fa-file mr-2 text-indigo-500"></i>
+                                            <i class="fas fa-file mr-2 text-emerald-500"></i>
                                             <span id="file-name" class="text-sm truncate max-w-xs"></span>
                                         </div>
                                         <button type="button" id="remove-file" class="text-red-500 hover:text-red-700">
@@ -72,14 +72,14 @@
                                 </div>
 
                                 <div class="flex items-center">
-                                    <button type="button" id="emoji-button" class="p-2 text-gray-500 hover:text-indigo-500 focus:outline-none">
+                                    <button type="button" id="emoji-button" class="p-2 text-gray-500 hover:text-emerald-500 focus:outline-none">
                                         <i class="far fa-smile text-xl"></i>
                                     </button>
-                                    <input type="text" id="message-input" class="flex-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Type your message...">
-                                    <button type="button" id="attach-button" class="p-2 text-gray-500 hover:text-indigo-500 focus:outline-none">
+                                    <input type="text" id="message-input" class="flex-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm" placeholder="Type your message...">
+                                    <button type="button" id="attach-button" class="p-2 text-gray-500 hover:text-emerald-500 focus:outline-none">
                                         <i class="fas fa-paperclip text-xl"></i>
                                     </button>
-                                    <button type="submit" id="send-button" class="ml-3 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    <button type="submit" id="send-button" class="ml-3 inline-flex items-center px-4 py-2 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 focus:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                         <i class="fas fa-paper-plane mr-2"></i> Send
                                     </button>
                                 </div>
@@ -517,21 +517,21 @@
                             // Update file icon based on file type
                             const fileIcon = filePreview.querySelector('i');
                             if (file.type.startsWith('image/')) {
-                                fileIcon.className = 'fas fa-image mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-image mr-2 text-emerald-500';
                             } else if (file.type.startsWith('video/')) {
-                                fileIcon.className = 'fas fa-video mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-video mr-2 text-emerald-500';
                             } else if (file.type.startsWith('audio/')) {
-                                fileIcon.className = 'fas fa-music mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-music mr-2 text-emerald-500';
                             } else if (file.type.includes('pdf')) {
-                                fileIcon.className = 'fas fa-file-pdf mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-pdf mr-2 text-emerald-500';
                             } else if (file.type.includes('word') || file.type.includes('document')) {
-                                fileIcon.className = 'fas fa-file-word mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-word mr-2 text-emerald-500';
                             } else if (file.type.includes('excel') || file.type.includes('sheet')) {
-                                fileIcon.className = 'fas fa-file-excel mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-excel mr-2 text-emerald-500';
                             } else if (file.type.includes('powerpoint') || file.type.includes('presentation')) {
-                                fileIcon.className = 'fas fa-file-powerpoint mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-powerpoint mr-2 text-emerald-500';
                             } else {
-                                fileIcon.className = 'fas fa-file mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file mr-2 text-emerald-500';
                             }
                         }
                     });
@@ -739,7 +739,7 @@
                                         <div class="flex items-center text-sm">
                                             <i class="fas ${fileIcon} mr-2"></i>
                                             <span class="truncate">${fileName}</span>
-                                            <a href="${fileUrl}" download="${fileName}" class="ml-2 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                            <a href="${fileUrl}" download="${fileName}" class="ml-2 text-emerald-600 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         </div>
@@ -755,7 +755,7 @@
                                             <span class="text-xs text-gray-500 dark:text-gray-400">File</span>
                                         </div>
                                         ${fileUrl && fileUrl !== '#' ? `
-                                            <a href="${fileUrl}" download="${fileName}" class="ml-3 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                            <a href="${fileUrl}" download="${fileName}" class="ml-3 text-emerald-600 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         ` : ''}
@@ -774,7 +774,7 @@
                             // Convert URLs to clickable links
                             const linkedText = escapedText.replace(
                                 /(https?:\/\/[^\s]+)/g,
-                                '<a href="$1" target="_blank" class="text-indigo-600 hover:underline dark:text-indigo-400">$1</a>'
+                                '<a href="$1" target="_blank" class="text-emerald-600 hover:underline dark:text-emerald-400">$1</a>'
                             );
 
                             messageContent = linkedText;
@@ -783,7 +783,7 @@
                         messageDiv.setAttribute('data-message-id', messageId);
                         messageDiv.innerHTML = `
                             <div class="flex ${isCurrentUser ? 'flex-row-reverse' : 'flex-row'} items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 ${isCurrentUser ? 'ml-3' : 'mr-3'}">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 ${isCurrentUser ? 'ml-3' : 'mr-3'}">
                                     ${profileUrl ? `<img src="${profileUrl}" alt="${nickname}" class="h-10 w-10 rounded-full">` : initial}
                                 </div>
                                 <div>
@@ -795,7 +795,7 @@
                                             ${timestamp.toLocaleString()}
                                         </span>
                                     </div>
-                                    <div class="message-content ${isCurrentUser ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'} px-4 py-2 rounded-lg">
+                                    <div class="message-content ${isCurrentUser ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'} px-4 py-2 rounded-lg">
                                         ${messageContent}
                                     </div>
                                 </div>

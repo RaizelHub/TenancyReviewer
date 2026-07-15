@@ -18,7 +18,7 @@ class TeacherQuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::with(['activity.subject'])->latest()->paginate(10);
+        $quizzes = Quiz::with(['activity.subject'])->withCount('questions')->latest()->paginate(10);
         return view('app.teacher-quizzes.index', compact('quizzes'));
     }
 

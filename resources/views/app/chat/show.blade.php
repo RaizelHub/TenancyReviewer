@@ -28,21 +28,21 @@
                     @endphp
 
                     @if($hasSubjectContext)
-                        <div class="bg-indigo-50 dark:bg-indigo-900/20 -mx-4 -mt-4 px-4 py-2 mb-3 flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-2">
+                        <div class="bg-emerald-50 dark:bg-emerald-900/20 -mx-4 -mt-4 px-4 py-2 mb-3 flex items-center">
+                            <div class="h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-2">
                                 <i class="fas fa-book"></i>
                             </div>
                             <div class="flex-1">
-                                <p class="text-xs text-indigo-700 dark:text-indigo-300">Subject Chat</p>
-                                <h3 class="text-sm font-medium text-indigo-900 dark:text-indigo-100">
+                                <p class="text-xs text-emerald-700 dark:text-emerald-300">Subject Chat</p>
+                                <h3 class="text-sm font-medium text-emerald-900 dark:text-emerald-100">
                                     {{ $channelData['subject_name'] ?? 'Unknown Subject' }}
                                     @if(!empty($channelData['subject_code']))
-                                        <span class="text-xs text-indigo-600 dark:text-indigo-400 ml-1">({{ $channelData['subject_code'] }})</span>
+                                        <span class="text-xs text-emerald-600 dark:text-emerald-400 ml-1">({{ $channelData['subject_code'] }})</span>
                                     @endif
                                 </h3>
                             </div>
                             @if(!empty($channelData['subject_id']))
-                                <a href="{{ route('subjects.show', $channelData['subject_id']) }}" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center">
+                                <a href="{{ route('subjects.show', $channelData['subject_id']) }}" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline flex items-center">
                                     View Subject <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                                 </a>
                             @endif
@@ -55,7 +55,7 @@
                             <i class="fas fa-arrow-left"></i>
                         </a>
 
-                        <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
+                        <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3">
                             <i class="fas fa-comments"></i>
                         </div>
 
@@ -87,8 +87,8 @@
                 <div id="chat-messages" class="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
                     @if(empty($messages))
                         <div class="text-center py-12 h-full flex flex-col items-center justify-center">
-                            <div class="w-20 h-20 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-4">
-                                <i class="fas fa-comments text-3xl text-indigo-600 dark:text-indigo-400"></i>
+                            <div class="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-comments text-3xl text-emerald-600 dark:text-emerald-400"></i>
                             </div>
                             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No messages yet</h3>
                             <p class="text-gray-500 dark:text-gray-400 max-w-sm text-center">
@@ -125,7 +125,7 @@
 
                                 <div class="flex {{ $isCurrentUser ? 'justify-end' : 'justify-start' }} group" data-message-id="{{ $message['message_id'] ?? '' }}">
                                     <div class="flex max-w-[75%] {{ $isCurrentUser ? 'flex-row-reverse' : 'flex-row' }} items-end">
-                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 {{ $isCurrentUser ? 'ml-2' : 'mr-2' }} mb-1">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 {{ $isCurrentUser ? 'ml-2' : 'mr-2' }} mb-1">
                                             @if(isset($message['user']['profile_url']) && $message['user']['profile_url'])
                                                 <img src="{{ $message['user']['profile_url'] }}" alt="{{ $message['user']['nickname'] }}" class="h-8 w-8 rounded-full">
                                             @else
@@ -146,7 +146,7 @@
 
                                             <div class="message-content rounded-2xl px-4 py-2 inline-block
                                                 {{ $isCurrentUser
-                                                    ? 'bg-indigo-600 text-white rounded-br-none'
+                                                    ? 'bg-emerald-600 text-white rounded-br-none'
                                                     : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-none border border-gray-200 dark:border-gray-600'
                                                 }}">
                                                 {{ $message['message'] }}
@@ -183,7 +183,7 @@
                         <div id="file-preview" class="hidden p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <i class="fas fa-file mr-2 text-indigo-500"></i>
+                                    <i class="fas fa-file mr-2 text-emerald-500"></i>
                                     <span id="file-name" class="text-sm truncate max-w-xs"></span>
                                 </div>
                                 <button type="button" id="remove-file" class="text-red-500 hover:text-red-700">
@@ -196,7 +196,7 @@
                             <div class="flex-1 relative">
                                 <textarea id="message-input" rows="1"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
-                                    focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm pl-10 pr-12 py-3 resize-none"
+                                    focus:border-emerald-500 focus:ring-emerald-500 rounded-lg shadow-sm pl-10 pr-12 py-3 resize-none"
                                     placeholder="Type your message..." style="min-height: 44px; max-height: 120px;"></textarea>
 
                                 <button type="button" id="emoji-button" class="absolute left-2 bottom-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 p-1">
@@ -212,9 +212,9 @@
                             </div>
 
                             <button type="submit" id="send-button"
-                                class="ml-3 inline-flex items-center justify-center w-10 h-10 bg-indigo-600 border border-transparent
-                                rounded-full text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                focus:ring-indigo-500 transition-colors duration-150 shadow-sm">
+                                class="ml-3 inline-flex items-center justify-center w-10 h-10 bg-emerald-600 border border-transparent
+                                rounded-full text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                focus:ring-emerald-500 transition-colors duration-150 shadow-sm">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
@@ -693,21 +693,21 @@
                             // Update file icon based on file type
                             const fileIcon = filePreview.querySelector('i');
                             if (file.type.startsWith('image/')) {
-                                fileIcon.className = 'fas fa-image mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-image mr-2 text-emerald-500';
                             } else if (file.type.startsWith('video/')) {
-                                fileIcon.className = 'fas fa-video mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-video mr-2 text-emerald-500';
                             } else if (file.type.startsWith('audio/')) {
-                                fileIcon.className = 'fas fa-music mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-music mr-2 text-emerald-500';
                             } else if (file.type.includes('pdf')) {
-                                fileIcon.className = 'fas fa-file-pdf mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-pdf mr-2 text-emerald-500';
                             } else if (file.type.includes('word') || file.type.includes('document')) {
-                                fileIcon.className = 'fas fa-file-word mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-word mr-2 text-emerald-500';
                             } else if (file.type.includes('excel') || file.type.includes('sheet')) {
-                                fileIcon.className = 'fas fa-file-excel mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-excel mr-2 text-emerald-500';
                             } else if (file.type.includes('powerpoint') || file.type.includes('presentation')) {
-                                fileIcon.className = 'fas fa-file-powerpoint mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file-powerpoint mr-2 text-emerald-500';
                             } else {
-                                fileIcon.className = 'fas fa-file mr-2 text-indigo-500';
+                                fileIcon.className = 'fas fa-file mr-2 text-emerald-500';
                             }
                         }
                     });
@@ -948,7 +948,7 @@
                                         <div class="flex items-center text-sm">
                                             <i class="fas ${fileIcon} mr-2"></i>
                                             <span class="truncate">${fileName}</span>
-                                            <a href="${fileUrl}" download="${fileName}" class="ml-2 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                            <a href="${fileUrl}" download="${fileName}" class="ml-2 text-emerald-600 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         </div>
@@ -964,7 +964,7 @@
                                             <span class="text-xs text-gray-500 dark:text-gray-400">File</span>
                                         </div>
                                         ${fileUrl && fileUrl !== '#' ? `
-                                            <a href="${fileUrl}" download="${fileName}" class="ml-3 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                            <a href="${fileUrl}" download="${fileName}" class="ml-3 text-emerald-600 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         ` : ''}
@@ -983,7 +983,7 @@
                             // Convert URLs to clickable links
                             const linkedText = escapedText.replace(
                                 /(https?:\/\/[^\s]+)/g,
-                                '<a href="$1" target="_blank" class="text-indigo-600 hover:underline dark:text-indigo-400">$1</a>'
+                                '<a href="$1" target="_blank" class="text-emerald-600 hover:underline dark:text-emerald-400">$1</a>'
                             );
 
                             messageContent = linkedText;
@@ -992,7 +992,7 @@
                         messageDiv.setAttribute('data-message-id', messageId);
                         messageDiv.innerHTML = `
                             <div class="flex ${isCurrentUser ? 'flex-row-reverse' : 'flex-row'} items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 ${isCurrentUser ? 'ml-3' : 'mr-3'}">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 ${isCurrentUser ? 'ml-3' : 'mr-3'}">
                                     ${profileUrl ? `<img src="${profileUrl}" alt="${nickname}" class="h-10 w-10 rounded-full">` : initial}
                                 </div>
                                 <div>
@@ -1004,7 +1004,7 @@
                                             ${timestamp.toLocaleString()}
                                         </span>
                                     </div>
-                                    <div class="message-content ${isCurrentUser ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'} px-4 py-2 rounded-lg">
+                                    <div class="message-content ${isCurrentUser ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'} px-4 py-2 rounded-lg">
                                         ${messageContent}
                                     </div>
                                 </div>

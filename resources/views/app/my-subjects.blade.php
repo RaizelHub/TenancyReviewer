@@ -58,7 +58,7 @@
                                             <span class="text-sm text-gray-600 dark:text-gray-300">{{ $subject->activities->count() }} activities</span>
                                         </div>
                                         <div class="flex items-center">
-                                            <div class="p-1.5 rounded-md bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 mr-2">
+                                            <div class="p-1.5 rounded-md bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 mr-2">
                                                 <i class="fas fa-user text-sm"></i>
                                             </div>
                                             <span class="text-sm text-gray-600 dark:text-gray-300">{{ $subject->user->name }}</span>
@@ -78,7 +78,7 @@
                                                 {{ $subject->activities->where('type', 'material')->count() }}
                                             </div>
                                         </div>
-                                        <div class="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg p-3 text-center">
+                                        <div class="bg-gradient-to-r from-emerald-500 to-blue-600 rounded-lg p-3 text-center">
                                             <div class="text-xs text-white/80 mb-1">Grade</div>
                                             @php
                                                 $student = Auth::guard('student')->user();
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
 
-                                    <a href="{{ route('student.subject.show', $subject->id) }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 text-sm font-medium shadow-sm">
+                                    <a href="{{ route('student.subject.show', $subject->id) }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-lg hover:from-blue-700 hover:to-emerald-700 transition-all duration-300 text-sm font-medium shadow-sm">
                                         <i class="fas fa-eye mr-1.5"></i>
                                         View Details
                                     </a>

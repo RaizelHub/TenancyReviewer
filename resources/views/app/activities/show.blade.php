@@ -41,7 +41,7 @@
                                 </a>
                                 @php
                                     $typeColors = [
-                                        'assignment' => 'purple',
+                                        'assignment' => 'emerald',
                                         'material' => 'green',
                                         'announcement' => 'amber'
                                     ];
@@ -134,7 +134,7 @@
                             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                 <h4 class="font-medium text-gray-900 dark:text-white mb-2">Activity Document</h4>
                                 <div class="flex items-center space-x-2">
-                                    <a href="{{ route('activities.file-viewer', ['path' => $activity->activity_document_path]) }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm shadow-sm">
+                                    <a href="{{ route('activities.file-viewer', ['path' => $activity->activity_document_path]) }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm shadow-sm">
                                         <i class="fas fa-eye mr-1.5"></i>
                                         View
                                     </a>
@@ -150,7 +150,7 @@
                             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                 <h4 class="font-medium text-gray-900 dark:text-white mb-2">Reviewer Attachment</h4>
                                 <div class="flex items-center space-x-2">
-                                    <a href="{{ route('activities.file-viewer', ['path' => $activity->reviewer_attachment_path]) }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm shadow-sm">
+                                    <a href="{{ route('activities.file-viewer', ['path' => $activity->reviewer_attachment_path]) }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm shadow-sm">
                                         <i class="fas fa-eye mr-1.5"></i>
                                         View
                                     </a>
@@ -165,7 +165,7 @@
                         @if($activity->google_docs_url)
                             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                 <h4 class="font-medium text-gray-900 dark:text-white mb-2">Google Docs</h4>
-                                <a href="{{ $activity->google_docs_url }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm shadow-sm">
+                                <a href="{{ $activity->google_docs_url }}" target="_blank" class="inline-flex items-center px-3 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm shadow-sm">
                                     <i class="fab fa-google-drive mr-1.5"></i>
                                     Open in Google Docs
                                 </a>
@@ -183,7 +183,7 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Quiz</h3>
                             @if(!$activity->hasQuiz())
-                                <a href="{{ route('teacher-quizzes.create', ['activity_id' => $activity->id]) }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                                <a href="{{ route('teacher-quizzes.create', ['activity_id' => $activity->id]) }}" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -205,13 +205,13 @@
                                             <span class="text-xs {{ $activity->quiz->is_published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }} px-2 py-0.5 rounded-full">
                                                 {{ $activity->quiz->is_published ? 'Published' : 'Draft' }}
                                             </span>
-                                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">
+                                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
                                                 Passing score: {{ $activity->quiz->passing_score }}%
                                             </span>
                                         </div>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <a href="{{ route('teacher-quizzes.show', $activity->quiz->id) }}" class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm">
+                                        <a href="{{ route('teacher-quizzes.show', $activity->quiz->id) }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -229,7 +229,7 @@
                                 <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">No Quiz Added</h3>
                                 <p class="mt-1 text-gray-500 dark:text-gray-400">Add a quiz to this material to test student knowledge.</p>
                                 <div class="mt-6">
-                                    <a href="{{ route('teacher-quizzes.create', ['activity_id' => $activity->id]) }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                                    <a href="{{ route('teacher-quizzes.create', ['activity_id' => $activity->id]) }}" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                         </svg>
@@ -262,9 +262,9 @@
                                 <h4 class="text-sm font-medium text-green-800 dark:text-green-300">Submitted</h4>
                                 <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ $submittedCount }} / {{ $totalStudents }}</p>
                             </div>
-                            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
-                                <h4 class="text-sm font-medium text-purple-800 dark:text-purple-300">Graded</h4>
-                                <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ $gradedCount }} / {{ $submittedCount }}</p>
+                            <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-lg">
+                                <h4 class="text-sm font-medium text-emerald-800 dark:text-emerald-300">Graded</h4>
+                                <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ $gradedCount }} / {{ $submittedCount }}</p>
                             </div>
                         </div>
 

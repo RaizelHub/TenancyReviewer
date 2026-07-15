@@ -195,4 +195,66 @@ class GradeReportController extends Controller
             'attempts' => $attemptDetails
         ];
     }
+
+    /**
+     * Export student grades for a subject as a CSV file.
+     */
+    public function exportGrades(Subject $subject)
+    {
+        $students = $subject->students;
+
+        if ($students->isEmpty()) {
+            return back()->with('error', 'No students enrolled in this subject.');
+        }
+
+        // Get all activities for the subject to use as header columns
+        $activities = Activity::where('subject_id', $subject->id)->get();
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="gradebook_' . strtolower(\Illuminate\Support\Str::slug($subject->name)) . '_' . date('Y_m_d') . '.csv"',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0'
+        ];
+
+        $callback = function() use ($students, $activities, $subject) {
+            $file = fopen('php://output', 'w');
+
+            // Header row
+            $header = ['Student ID', 'Student Name', 'Email'];
+            foreach ($activities as $activity) {
+                $header[] = $activity->title . ' (Max: ' . ($activity->points ?? 100) . ')';
+            }
+            $header[] = 'Final Grade (%)';
+            $header[] = 'Equivalent Grade';
+            fputcsv($file, $header);
+
+            // Data rows
+            foreach ($students as $student) {
+                $gradeData = $student->calculateFinalGradeForSubject($subject->id);
+                
+                $row = [
+                    $student->student_id ?? 'N/A',
+                    $student->name,
+                    $student->email
+                ];
+
+                foreach ($activities as $activity) {
+                    // Check if the student has a submission for this activity
+                    $submission = $activity->submissions->where('student_id', $student->id)->first();
+                    $row[] = $submission ? ($submission->grade ?? 'Pending') : 'No submission';
+                }
+
+                $row[] = round($gradeData['grade'] ?? 0, 1) . '%';
+                $row[] = $gradeData['college_grade'] ?? 'N/A';
+
+                fputcsv($file, $row);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

@@ -40,7 +40,7 @@
             <div class="mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                     <div class="flex items-center mb-4 md:mb-0">
-                        <div class="p-2 rounded-full {{ $currentPlan == 'Pro' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : ($currentPlan == 'Premium' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400') }} mr-3">
+                        <div class="p-2 rounded-full {{ $currentPlan == 'Pro' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' : ($currentPlan == 'Premium' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400') }} mr-3">
                             <i class="fas {{ $currentPlan == 'Pro' ? 'fa-crown' : ($currentPlan == 'Premium' ? 'fa-star' : 'fa-user') }} text-lg"></i>
                         </div>
                         <div>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     @if($currentPlan != 'Pro')
-                        <a href="#" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg hover:from-purple-600 hover:to-indigo-600 shadow-sm transition-all duration-200 text-sm">
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 shadow-sm transition-all duration-200 text-sm">
                             <i class="fas fa-arrow-up mr-2"></i>
                             Upgrade Plan
                         </a>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="w-full md:w-auto flex items-end">
-                            <button type="submit" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 shadow-sm hover:shadow transition-all duration-200">
+                            <button type="submit" class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl hover:from-blue-600 hover:to-emerald-600 shadow-sm hover:shadow transition-all duration-200">
                                 <i class="fas fa-search mr-2"></i>
                                 Search
                             </button>
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="flex items-center">
                                         <div class="flex flex-col items-end mr-6">
-                                            <span class="text-xs font-medium {{ $student->plan == 'premium' ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }} px-2.5 py-1 rounded-full mb-1.5 shadow-sm">
+                                            <span class="text-xs font-medium {{ $student->plan == 'premium' ? 'bg-emerald-600 text-white' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' }} px-2.5 py-1 rounded-full mb-1.5 shadow-sm">
                                                 @if($student->plan == 'premium')
                                                     <i class="fas fa-crown text-amber-300 mr-1"></i>
                                                 @endif
@@ -137,7 +137,7 @@
                                             </span>
                                             <span class="text-xs bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 px-2.5 py-1 rounded-full flex items-center">
                                                 <i class="fas fa-book text-gray-400 dark:text-gray-500 mr-1"></i>
-                                                {{ $student->subjects->count() }} {{ Str::plural('subject', $student->subjects->count()) }}
+                                                {{ $student->subjects_count }} {{ Str::plural('subject', $student->subjects_count) }}
                                             </span>
                                         </div>
                                         <div class="flex space-x-1">

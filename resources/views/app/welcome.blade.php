@@ -1,283 +1,42 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches }" x-init="$watch('darkMode', val => { localStorage.setItem('darkMode', val); if (val) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); } }); if (darkMode) { document.documentElement.classList.add('dark'); }">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ tenant() ? tenant()->name : config('app.name', 'Tenant Portal') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=poppins:300,400,500,600,700&display=swap" rel="stylesheet" />
-
-        <!-- Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-        <!-- Alpine.js -->
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-        <!-- AOS Animation Library -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <style>
-            body {
-                font-family: 'Poppins', sans-serif;
-                scroll-behavior: smooth;
-            }
-
-            /* Background enhancement using layered blobs */
-            .bg-enhance::before,
-            .bg-enhance::after {
-                content: '';
-                position: absolute;
-                z-index: 0;
-                border-radius: 9999px;
-                opacity: 0.15;
-                filter: blur(80px);
-            }
-            .bg-enhance::before {
-                width: 300px;
-                height: 300px;
-                background: #7da3e0;
-                top: -50px;
-                left: -50px;
-                animation: float 8s ease-in-out infinite;
-            }
-            .bg-enhance::after {
-                width: 350px;
-                height: 350px;
-                background: #ffe5f3;
-                bottom: -80px;
-                right: -50px;
-                animation: float 10s ease-in-out infinite reverse;
-            }
-
-            @keyframes float {
-                0% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
-                100% { transform: translateY(0px); }
-            }
-
-            .gradient-text {
-                background: linear-gradient(to right, #4473be, #7da3e0);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                color: transparent;
-            }
-
-            .feature-card {
-                transition: all 0.3s ease;
-            }
-            .feature-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            }
-
-            /* Custom scrollbar */
-            ::-webkit-scrollbar {
-                width: 6px;
-            }
-            ::-webkit-scrollbar-track {
-                background: #f1f1f1;
-            }
-            ::-webkit-scrollbar-thumb {
-                background: #7da3e0;
-                border-radius: 10px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: #4473be;
-            }
-        </style>
-    </head>
-    <body class="relative bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen flex flex-col items-center overflow-x-hidden" x-data="{ mobileMenuOpen: false }" x-init="AOS.init({ duration: 800, once: true })">
-        <!-- Background layer -->
-        <div class="absolute inset-0 bg-enhance pointer-events-none"></div>
-
-        <!-- Header/Navigation -->
-        <header class="w-full max-w-7xl px-6 lg:px-8 py-4 flex items-center justify-between z-10">
-            <div class="flex items-center">
-                <a href="/" class="flex items-center gap-2">
-                    <span class="text-xl font-bold gradient-text">{{ tenant() ? tenant()->name : config('app.name', 'Tenant Portal') }}</span>
-                </a>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ tenant('name') ?? config('app.name', 'Classroom') }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-slate-50 font-sans text-gray-900 antialiased">
+    <div class="min-h-screen">
+        <header class="border-b border-gray-200 bg-white">
+            <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+                <a href="/" class="flex min-w-0 items-center gap-3"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-lg font-bold text-white">{{ strtoupper(substr(tenant('name') ?? 'C', 0, 1)) }}</span><span class="min-w-0"><span class="block truncate text-base font-semibold text-gray-900">{{ tenant('name') ?? config('app.name', 'Classroom') }}</span><span class="block text-xs text-gray-500">Learning workspace</span></span></a>
+                @auth<a href="{{ url('/dashboard') }}" class="app-btn-primary">Open dashboard <i class="fas fa-arrow-right"></i></a>@else<a href="{{ route('login', [], false) }}" class="app-btn-primary">Sign in <i class="fas fa-arrow-right-to-bracket"></i></a>@endauth
             </div>
-
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-4">
-                @routeCheck('login')
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="px-5 py-2 bg-[#4473be] text-white rounded-full hover:bg-[#3a5fa0] transition text-sm">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login', [], false) }}" class="px-5 py-2 border border-[#4473be] text-[#4473be] rounded-full hover:bg-[#4473be] hover:text-white transition text-sm">
-                            Log in
-                        </a>
-                    @endauth
-                @endrouteCheck
-
-                <!-- Dark mode toggle -->
-                <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-                    <i class="fas" :class="darkMode ? 'fa-sun text-yellow-400' : 'fa-moon text-gray-700'"></i>
-                </button>
-            </nav>
-
-            <!-- Mobile menu button -->
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-                <i class="fas" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-            </button>
         </header>
 
-        <!-- Mobile Navigation -->
-        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="md:hidden fixed top-16 inset-x-0 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-b-xl z-20 p-4">
-            <nav class="flex flex-col gap-3">
-                @routeCheck('login')
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="px-4 py-2 bg-[#4473be] text-white rounded-full hover:bg-[#3a5fa0] transition text-center text-sm">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login', [], false) }}" class="px-4 py-2 border border-[#4473be] text-[#4473be] rounded-full hover:bg-[#4473be] hover:text-white transition text-center text-sm">
-                            Log in
-                        </a>
-                    @endauth
-                @endrouteCheck
+        <main>
+            <section class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-24">
+                <div><span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Connected learning</span><h1 class="mt-6 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">A better home for <span class="text-emerald-700">teaching and learning.</span></h1><p class="mt-6 max-w-xl text-lg leading-8 text-gray-600">{{ tenant('name') ?? 'Your classroom' }} brings subjects, activities, materials, and classroom communication into one focused workspace.</p><div class="mt-8 flex flex-col gap-3 sm:flex-row">@auth<a href="{{ url('/dashboard') }}" class="app-btn-primary">Go to dashboard <i class="fas fa-arrow-right"></i></a>@else<a href="{{ route('login', [], false) }}" class="app-btn-primary">Sign in to continue <i class="fas fa-arrow-right-to-bracket"></i></a>@endauth<a href="#features" class="app-btn-secondary">Explore features</a></div><div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-600"><span><i class="fas fa-check mr-2 text-emerald-600"></i>Organized learning</span><span><i class="fas fa-check mr-2 text-emerald-600"></i>Secure access</span><span><i class="fas fa-check mr-2 text-emerald-600"></i>Built for focus</span></div></div>
+                <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white p-3 shadow-md">
+    <div class="flex h-[24rem] flex-col rounded-xl bg-emerald-950 p-5 sm:h-[30rem] sm:p-7" role="img" aria-label="Illustration of an organized digital classroom workspace">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-emerald-300"></span><span class="text-sm font-semibold text-emerald-50">Classroom workspace</span></div><span class="rounded-lg bg-white/10 px-3 py-1 text-xs font-medium text-emerald-100">Today</span></div>
+        <div class="mt-7 grid flex-1 grid-cols-5 gap-4"><div class="col-span-2 rounded-xl bg-white p-4"><div class="h-3 w-20 rounded bg-emerald-100"></div><div class="mt-5 space-y-3"><div class="rounded-lg border border-gray-100 p-3"><div class="h-2 w-16 rounded bg-gray-200"></div><div class="mt-2 h-2 w-full rounded bg-gray-100"></div></div><div class="rounded-lg border border-gray-100 p-3"><div class="h-2 w-12 rounded bg-gray-200"></div><div class="mt-2 h-2 w-4/5 rounded bg-gray-100"></div></div></div></div><div class="col-span-3 flex flex-col rounded-xl bg-emerald-800 p-5"><span class="inline-flex w-fit rounded-full bg-emerald-700 px-2.5 py-1 text-xs font-semibold text-emerald-100">Active learning</span><div class="mt-auto"><div class="h-3 w-3/4 rounded bg-emerald-200"></div><div class="mt-3 h-2 w-full rounded bg-emerald-700"></div><div class="mt-2 h-2 w-2/3 rounded bg-emerald-700"></div><div class="mt-5 grid grid-cols-3 gap-2"><span class="h-12 rounded-lg bg-emerald-700"></span><span class="h-12 rounded-lg bg-emerald-700"></span><span class="h-12 rounded-lg bg-emerald-700"></span></div></div></div></div>
+        <div class="mt-5 flex items-center gap-3"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500 text-white"><i class="fas fa-graduation-cap"></i></span><div><p class="text-sm font-medium text-white">Everything in one place</p><p class="text-xs text-emerald-200">Subjects, activities, and progress</p></div></div>
+    </div>
+</div>
+            </section>
 
-                <!-- Dark mode toggle -->
-                <button @click="darkMode = !darkMode" class="flex items-center justify-center gap-2 px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-                    <i class="fas" :class="darkMode ? 'fa-sun text-yellow-400' : 'fa-moon text-gray-700'"></i>
-                    <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
-                </button>
-            </nav>
-        </div>
-
-        <!-- Hero Section -->
-        <section class="w-full max-w-7xl px-6 lg:px-8 py-16 md:py-24 z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2" data-aos="fade-right">
-                    <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-                        Welcome to <span class="gradient-text">{{ tenant() ? tenant()->name : 'Your Tenant Portal' }}</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                        Access your personalized dashboard, manage your account, and explore all the features available to you.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="px-6 py-3 bg-[#4473be] text-white rounded-full hover:bg-[#3a5fa0] transition text-center text-sm">
-                                Go to Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login', [], false) }}" class="px-6 py-3 bg-[#4473be] text-white rounded-full hover:bg-[#3a5fa0] transition text-center text-sm">
-                                Sign In
-                            </a>
-                        @endauth
-                    </div>
+            <section id="features" class="border-y border-gray-200 bg-white">
+                <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8"><div class="max-w-2xl"><p class="text-sm font-semibold text-emerald-700">Everything in one place</p><h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-900">Designed around the academic day.</h2><p class="mt-4 text-base leading-7 text-gray-600">A clean, reliable workspace for instructors and students to keep learning moving forward.</p></div>
+                    <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3"><article class="rounded-2xl border border-gray-200 p-6"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700"><i class="fas fa-book-open"></i></span><h3 class="mt-5 font-semibold text-gray-900">Structured subjects</h3><p class="mt-2 text-sm leading-6 text-gray-600">Keep classes, materials, activities, and student work organized by subject.</p></article><article class="rounded-2xl border border-gray-200 p-6"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700"><i class="fas fa-list-check"></i></span><h3 class="mt-5 font-semibold text-gray-900">Clear progress</h3><p class="mt-2 text-sm leading-6 text-gray-600">Stay on top of assignments, feedback, submissions, and learning milestones.</p></article><article class="rounded-2xl border border-gray-200 p-6"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700"><i class="fas fa-comments"></i></span><h3 class="mt-5 font-semibold text-gray-900">Better communication</h3><p class="mt-2 text-sm leading-6 text-gray-600">Use focused classroom conversations to keep people connected and informed.</p></article></div>
                 </div>
-                <div class="lg:w-1/2 relative" data-aos="fade-left">
-                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#4473be]/10 rounded-full filter blur-xl"></div>
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-[#7da3e0]/10 rounded-full filter blur-xl"></div>
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tenant Portal" class="rounded-2xl shadow-2xl w-full">
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="w-full max-w-7xl px-6 lg:px-8 py-16 z-10">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold mb-4">Features & Benefits</h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                    Discover all the powerful tools and features available to you through our tenant portal.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl shadow-lg feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-12 h-12 bg-[#4473be]/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-tachometer-alt text-xl text-[#4473be]"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">Personalized Dashboard</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">
-                        Access your custom dashboard with all your important information and tools in one place.
-                    </p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl shadow-lg feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-12 h-12 bg-[#4473be]/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-shield-alt text-xl text-[#4473be]"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">Secure Access</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">
-                        Your data is protected with enterprise-grade security and authentication protocols.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl shadow-lg feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-12 h-12 bg-[#4473be]/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-chart-line text-xl text-[#4473be]"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">Real-time Analytics</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">
-                        Monitor your performance and track important metrics with our intuitive analytics tools.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="w-full max-w-7xl px-6 lg:px-8 py-16 z-10">
-            <div class="bg-gradient-to-r from-[#4473be] to-[#7da3e0] rounded-2xl p-8 md:p-12 text-white text-center" data-aos="fade-up">
-                <h2 class="text-2xl md:text-3xl font-bold mb-4">Ready to Get Started?</h2>
-                <p class="text-lg mb-6 max-w-3xl mx-auto">
-                    Join our platform today and discover all the benefits of our tenant portal.
-                </p>
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="px-6 py-3 bg-white text-[#4473be] font-bold rounded-full hover:bg-gray-100 transition shadow-lg text-sm">
-                        Go to Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login', [], false) }}" class="px-6 py-3 bg-white text-[#4473be] font-bold rounded-full hover:bg-gray-100 transition shadow-lg text-sm">
-                        Sign In
-                    </a>
-                @endauth
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="w-full max-w-7xl px-6 lg:px-8 py-8 border-t border-gray-200 dark:border-gray-800 mt-auto z-10">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-sm text-gray-600 dark:text-gray-400">
-                    &copy; {{ date('Y') }} {{ tenant() ? tenant()->name : config('app.name', 'Tenant Portal') }}. All rights reserved.
-                </div>
-                <div class="flex gap-4">
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#4473be] dark:hover:text-[#7da3e0] transition">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#4473be] dark:hover:text-[#7da3e0] transition">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#4473be] dark:hover:text-[#7da3e0] transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#4473be] dark:hover:text-[#7da3e0] transition">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </div>
-        </footer>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Initialize AOS
-                AOS.init();
-            });
-        </script>
-    </body>
+            </section>
+            <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8"><div class="flex flex-col items-start justify-between gap-6 rounded-2xl border border-emerald-800 bg-emerald-700 p-8 text-white md:flex-row md:items-center md:p-10"><div><h2 class="text-2xl font-semibold">Ready to continue?</h2><p class="mt-2 text-emerald-100">Sign in to access your personalized workspace.</p></div>@auth<a href="{{ url('/dashboard') }}" class="app-btn-secondary">Open dashboard</a>@else<a href="{{ route('login', [], false) }}" class="app-btn-secondary">Sign in</a>@endauth</div></section>
+        </main>
+        <footer class="border-t border-gray-200 bg-white"><div class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between lg:px-8"><span>© {{ date('Y') }} {{ tenant('name') ?? config('app.name', 'Classroom') }}.</span><span>Learning, made more focused.</span></div></footer>
+    </div>
+</body>
 </html>

@@ -51,20 +51,21 @@ class RouteServiceProvider extends ServiceProvider
                 $root .= ':' . $port;
             }
 
+            $centralDomains = config('tenancy.central_domains', []);
+            $defaultCentral = $centralDomains[0] ?? $host;
+
             URL::forceRootUrl($root);
+            URL::defaults(['central_domain' => $defaultCentral]);
             config(['app.url' => $root]);
         });
 
         $centralDomains = $this->centralDomains();
 
-        // Register routes for central domains
-        foreach ($centralDomains as $domain) {
-            Route::domain($domain)->group(function () {
-                Route::middleware('web')->group(base_path('routes/web.php'));
+        if (!empty($centralDomains)) {
+            $pattern = implode('|', array_map('preg_quote', $centralDomains));
 
-                if (file_exists(base_path('routes/auth.php'))) {
-                    Route::middleware('web')->group(base_path('routes/auth.php'));
-                }
+            Route::domain('{central_domain}')->where(['central_domain' => $pattern])->group(function () {
+                Route::middleware('web')->group(base_path('routes/web.php'));
 
                 if (file_exists(base_path('routes/api.php'))) {
                     Route::middleware('api')
@@ -73,29 +74,10 @@ class RouteServiceProvider extends ServiceProvider
                 }
             });
         }
-
-        // Register routes for tenant domains
-        if (file_exists(base_path('routes/tenant.php'))) {
-            Route::middleware(['web', 'tenant'])
-                ->group(base_path('routes/tenant.php'));
-        }
     }
 
     protected function centralDomains(): array
     {
-        $domains = config('tenancy.central_domains');
-        $result = [];
-
-        // Add domains with and without port numbers
-        foreach ($domains as $domain) {
-            $result[] = $domain;
-
-            // Add domain with port 8000 for local development
-            if (!str_contains($domain, ':')) {
-                $result[] = $domain . ':8000';
-            }
-        }
-
-        return $result;
+        return config('tenancy.central_domains');
     }
 }

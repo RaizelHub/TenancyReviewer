@@ -4,7 +4,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-800">Add Questions</h1>
                 <a href="{{ route('teacher-quizzes.show', $quiz) }}"
-                   class="text-indigo-600 hover:text-indigo-800">
+                   class="text-emerald-600 hover:text-emerald-800">
                     <i class="fas fa-arrow-left mr-2"></i>Back to Quiz
                 </a>
             </div>
@@ -22,7 +22,7 @@
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Question Type</label>
-                                <select name="questions[0][type]" class="question-type w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                <select name="questions[0][type]" class="question-type w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" required>
                                     <option value="">Select a type</option>
                                     <option value="multiple_choice">Multiple Choice</option>
                                     <option value="true_false">True/False</option>
@@ -32,12 +32,12 @@
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Question Text</label>
-                                <textarea name="questions[0][question]" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required></textarea>
+                                <textarea name="questions[0][question]" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" required></textarea>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Points</label>
-                                <input type="number" name="questions[0][points]" min="1" max="100" value="1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                <input type="number" name="questions[0][points]" min="1" max="100" value="1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" required>
                             </div>
 
                             <!-- Multiple Choice Options -->
@@ -45,21 +45,21 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Options</label>
                                 <div class="options-container space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <input type="text" name="questions[0][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Option 1">
+                                        <input type="text" name="questions[0][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" placeholder="Option 1">
                                         <div class="flex items-center">
-                                            <input type="radio" name="questions[0][correct_option]" value="0" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
+                                            <input type="radio" name="questions[0][correct_option]" value="0" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300" checked>
                                             <label class="ml-2 text-sm text-gray-700">Correct</label>
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-2">
-                                        <input type="text" name="questions[0][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Option 2">
+                                        <input type="text" name="questions[0][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" placeholder="Option 2">
                                         <div class="flex items-center">
-                                            <input type="radio" name="questions[0][correct_option]" value="1" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <input type="radio" name="questions[0][correct_option]" value="1" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300">
                                             <label class="ml-2 text-sm text-gray-700">Correct</label>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="add-option mt-2 text-sm text-indigo-600 hover:text-indigo-800">
+                                <button type="button" class="add-option mt-2 text-sm text-emerald-600 hover:text-emerald-800">
                                     <i class="fas fa-plus mr-1"></i> Add Option
                                 </button>
                             </div>
@@ -69,11 +69,11 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
                                 <div class="space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <input type="radio" name="questions[0][correct_answer]" value="true" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
+                                        <input type="radio" name="questions[0][correct_answer]" value="true" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300" checked>
                                         <label class="text-sm text-gray-700">True</label>
                                     </div>
                                     <div class="flex items-center space-x-2">
-                                        <input type="radio" name="questions[0][correct_answer]" value="false" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <input type="radio" name="questions[0][correct_answer]" value="false" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300">
                                         <label class="text-sm text-gray-700">False</label>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                             <!-- Short Answer Options -->
                             <div class="short-answer-options hidden">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
-                                <input type="text" name="questions[0][correct_answer]" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <input type="text" name="questions[0][correct_answer]" class="w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             <i class="fas fa-plus mr-2"></i>Add Another Question
                         </button>
 
-                        <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-colors">
+                        <button type="submit" class="bg-emerald-600 text-white px-6 py-2 rounded-md hover:bg-emerald-700 transition-colors">
                             Save All Questions
                         </button>
                     </div>
@@ -197,9 +197,9 @@
                         const questionIndex = typeSelect.name.match(/questions\[(\d+)\]/)[1];
 
                         newOption.innerHTML = `
-                            <input type="text" name="questions[${questionIndex}][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Option ${optionCount + 1}">
+                            <input type="text" name="questions[${questionIndex}][options][]" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" placeholder="Option ${optionCount + 1}">
                             <div class="flex items-center">
-                                <input type="radio" name="questions[${questionIndex}][correct_option]" value="${optionCount}" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <input type="radio" name="questions[${questionIndex}][correct_option]" value="${optionCount}" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300">
                                 <label class="ml-2 text-sm text-gray-700">Correct</label>
                             </div>
                             <button type="button" class="text-red-600 hover:text-red-900 remove-option">

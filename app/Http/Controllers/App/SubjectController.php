@@ -28,7 +28,7 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Subject::where('user_id', Auth::id());
+        $query = Subject::where('user_id', Auth::id())->withCount(['students', 'activities']);
 
         // Apply search filter if provided
         if ($request->has('search') && !empty($request->search)) {
@@ -160,7 +160,17 @@ class SubjectController extends Controller
             }
         }
 
-        return view('app.subjects.show', compact('subject', 'students', 'topStudents'));
+        // Get all activities averages for analytics chart
+        $activityAverages = [];
+        $chartActivities = $subject->activities()->where('type', 'assignment')->get();
+        foreach ($chartActivities as $activity) {
+            $avg = \App\Models\Submission::where('activity_id', $activity->id)
+                ->whereNotNull('grade')
+                ->avg('grade');
+            $activityAverages[$activity->title] = $avg ? round($avg, 1) : 0;
+        }
+
+        return view('app.subjects.show', compact('subject', 'students', 'topStudents', 'activityAverages'));
     }
 
     /**

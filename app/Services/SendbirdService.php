@@ -18,6 +18,23 @@ class SendbirdService
     }
 
     /**
+     * Safely get the response body of Guzzle exceptions if available.
+     */
+    protected function getExceptionResponse(GuzzleException $e): ?string
+    {
+        try {
+            if (method_exists($e, 'hasResponse') && $e->hasResponse() && $e->getResponse()) {
+                $body = $e->getResponse()->getBody();
+                $body->rewind();
+                return $body->getContents();
+            }
+        } catch (\Exception $ex) {
+            Log::warning('Failed to read response body from exception: ' . $ex->getMessage());
+        }
+        return null;
+    }
+
+    /**
      * Create a Sendbird user
      *
      * @param string $userId
@@ -52,7 +69,7 @@ class SendbirdService
             Log::error('Sendbird create user error: ' . $e->getMessage(), [
                 'user_id' => $userId,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }
@@ -94,7 +111,7 @@ class SendbirdService
             Log::error('Sendbird get user error: ' . $e->getMessage(), [
                 'user_id' => $userId,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }
@@ -175,8 +192,7 @@ class SendbirdService
 
             return $result;
         } catch (GuzzleException $e) {
-            // Get the response body if available
-            $responseBody = $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null;
+            $responseBody = $this->getExceptionResponse($e);
 
             // Log detailed error information
             Log::error('Sendbird create group channel error: ' . $e->getMessage(), [
@@ -237,7 +253,7 @@ class SendbirdService
             Log::error('Sendbird get group channel error: ' . $e->getMessage(), [
                 'channel_url' => $channelUrl,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }
@@ -284,7 +300,7 @@ class SendbirdService
             Log::error('Sendbird list group channels error: ' . $e->getMessage(), [
                 'user_id' => $userId,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }
@@ -353,7 +369,7 @@ class SendbirdService
                 'channel_url' => $channelUrl,
                 'user_id' => $userId,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null,
+                'response' => $this->getExceptionResponse($e),
                 'request_url' => $fullUrl ?? 'unknown URL'
             ]);
 
@@ -440,7 +456,7 @@ class SendbirdService
             Log::error('Sendbird get messages error: ' . $e->getMessage(), [
                 'channel_url' => $channelUrl,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }
@@ -476,7 +492,7 @@ class SendbirdService
             Log::error('Sendbird delete channel error: ' . $e->getMessage(), [
                 'channel_url' => $channelUrl,
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return false;
         }
@@ -553,7 +569,7 @@ class SendbirdService
                 'user_id' => $userId,
                 'file_name' => $fileName ?? 'unknown',
                 'status_code' => $e->getCode(),
-                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                'response' => $this->getExceptionResponse($e)
             ]);
             return null;
         }

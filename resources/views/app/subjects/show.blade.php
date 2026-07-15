@@ -61,7 +61,7 @@
                             <a href="{{ route('subjects.chat.create', $subject->id) }}" class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">
                                 <i class="fas fa-comments mr-1"></i> Chat with Students
                             </a>
-                            <a href="{{ route('activities.create', ['subject_id' => $subject->id]) }}" class="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm">
+                            <a href="{{ route('activities.create', ['subject_id' => $subject->id]) }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
@@ -75,6 +75,9 @@
                             </button>
                             <a href="{{ route('subjects.grade-report', $subject->id) }}" class="inline-flex items-center px-3 py-1.5 bg-green-700 text-white rounded-md hover:bg-green-800 transition-colors text-sm">
                                 <i class="fas fa-file-pdf mr-1"></i> Grade Report
+                            </a>
+                            <a href="{{ route('subjects.export-grades', $subject->id) }}" class="inline-flex items-center px-3 py-1.5 bg-emerald-700 text-white rounded-md hover:bg-emerald-800 transition-colors text-sm">
+                                <i class="fas fa-file-excel mr-1"></i> Export CSV
                             </a>
                         </div>
                     </div>
@@ -168,12 +171,15 @@
             <!-- Tabs -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
                 <div class="border-b border-gray-200 dark:border-gray-700">
-                    <nav class="-mb-px flex">
-                        <button @click="activeTab = 'activities'" :class="{ 'border-blue-500 text-blue-600 dark:text-blue-400': activeTab === 'activities', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'activities' }" class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm">
+                    <nav class="-mb-px flex w-full">
+                        <button @click="activeTab = 'activities'" :class="{ 'border-blue-500 text-blue-600 dark:text-blue-400': activeTab === 'activities', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'activities' }" class="w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm">
                             Activities
                         </button>
-                        <button @click="activeTab = 'students'" :class="{ 'border-blue-500 text-blue-600 dark:text-blue-400': activeTab === 'students', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'students' }" class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm">
+                        <button @click="activeTab = 'students'" :class="{ 'border-blue-500 text-blue-600 dark:text-blue-400': activeTab === 'students', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'students' }" class="w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm">
                             Students
+                        </button>
+                        <button @click="activeTab = 'analytics'" :class="{ 'border-blue-500 text-blue-600 dark:text-blue-400': activeTab === 'analytics', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'analytics' }" class="w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm">
+                            Class Analytics
                         </button>
                     </nav>
                 </div>
@@ -230,7 +236,7 @@
                             <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">No activities yet</h3>
                             <p class="mt-1 text-gray-500 dark:text-gray-400">Create activities for your subject to get started.</p>
                             <div class="mt-6">
-                                <a href="{{ route('activities.create', ['subject_id' => $subject->id]) }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                                <a href="{{ route('activities.create', ['subject_id' => $subject->id]) }}" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -296,6 +302,24 @@
                                 </button>
                             </div>
                         </div>
+                </div>
+
+                <!-- Class Analytics Tab Content -->
+                <div x-show="activeTab === 'analytics'" class="p-6" style="display: none;">
+                    @if(!empty($activityAverages) && count($activityAverages) > 0)
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Class Performance Analytics</h3>
+                        <div class="relative h-96">
+                            <canvas id="classAnalyticsChart"></canvas>
+                        </div>
+                    @else
+                        <div class="text-center py-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                            </svg>
+                            <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">No analytics data</h3>
+                            <p class="mt-1 text-gray-500 dark:text-gray-400">Publish graded assignments to see average class statistics.</p>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -318,7 +342,7 @@
                     @csrf
                     <div class="mb-4">
                         <label for="student_ids" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Students</label>
-                        <select name="student_ids[]" id="student_ids" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" multiple>
+                        <select name="student_ids[]" id="student_ids" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500" multiple>
                             @php
                                 $availableStudents = \App\Models\Student::whereNotIn('id', $subject->students->pluck('id'))->get();
                             @endphp
@@ -342,4 +366,56 @@
             </div>
         </div>
     </div>
+
+    @if(!empty($activityAverages) && count($activityAverages) > 0)
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const ctxClass = document.getElementById('classAnalyticsChart').getContext('2d');
+                new Chart(ctxClass, {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode(array_keys($activityAverages)) !!},
+                        datasets: [{
+                            label: 'Average Score (%)',
+                            data: {!! json_encode(array_values($activityAverages)) !!},
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1.5,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    font: { family: 'Inter, sans-serif' }
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    font: { family: 'Inter, sans-serif' }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    @endif
 </x-tenant-app-layout>

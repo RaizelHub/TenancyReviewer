@@ -5,7 +5,7 @@
                 <h1 class="text-2xl font-bold text-gray-800">Question Details</h1>
                 <div class="flex space-x-4">
                     <a href="{{ route('teacher.quizzes.questions.edit', [$quiz, $question]) }}"
-                       class="text-indigo-600 hover:text-indigo-800">
+                       class="text-emerald-600 hover:text-emerald-800">
                         <i class="fas fa-edit mr-2"></i>Edit Question
                     </a>
                     <a href="{{ route('teacher.quizzes.questions.index', $quiz) }}"

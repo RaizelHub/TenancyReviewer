@@ -16,7 +16,7 @@
                     <div class="relative">
                         <input type="text" id="chat-search" placeholder="Search conversations..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
-                            focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                            focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                             bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-search text-gray-400 dark:text-gray-500"></i>
@@ -30,17 +30,17 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if(empty($channels))
                         <div class="text-center py-12">
-                            <div class="mx-auto w-24 h-24 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-6">
-                                <i class="fas fa-comments text-4xl text-indigo-600 dark:text-indigo-400"></i>
+                            <div class="mx-auto w-24 h-24 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-comments text-4xl text-emerald-600 dark:text-emerald-400"></i>
                             </div>
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">No conversations yet</h3>
                             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto mb-8">
                                 Start a conversation with your students to provide personalized support and guidance.
                             </p>
                             <a href="{{ route('chat.create') }}"
-                                class="inline-flex items-center px-5 py-3 bg-indigo-600 border border-transparent
-                                rounded-lg text-base font-medium text-white hover:bg-indigo-700
-                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                                class="inline-flex items-center px-5 py-3 bg-emerald-600 border border-transparent
+                                rounded-lg text-base font-medium text-white hover:bg-emerald-700
+                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500
                                 transition-colors duration-150 shadow-sm">
                                 <i class="fas fa-plus mr-2"></i> Start Your First Conversation
                             </a>
@@ -50,7 +50,7 @@
                         @if(!empty($subjectChannels))
                             <div class="mb-8">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                    <i class="fas fa-book-open mr-2 text-indigo-600 dark:text-indigo-400"></i>
+                                    <i class="fas fa-book-open mr-2 text-emerald-600 dark:text-emerald-400"></i>
                                     Subject Chats
                                 </h3>
 
@@ -58,7 +58,7 @@
                                     @foreach($subjectChannels as $subjectId => $subjectData)
                                         <div class="bg-gray-50 dark:bg-gray-750 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                                             <div class="flex items-center mb-3">
-                                                <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
+                                                <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3">
                                                     <i class="fas fa-book"></i>
                                                 </div>
                                                 <div>
@@ -72,7 +72,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="ml-auto">
-                                                    <a href="{{ route('subjects.show', $subjectData['subject_id']) }}" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+                                                    <a href="{{ route('subjects.show', $subjectData['subject_id']) }}" class="text-sm text-emerald-600 dark:text-emerald-400 hover:underline">
                                                         View Subject <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                                                     </a>
                                                 </div>
@@ -82,16 +82,16 @@
                                                 @foreach($subjectData['channels'] as $channel)
                                                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:shadow
                                                         transition-all duration-200 overflow-hidden border border-gray-100 dark:border-gray-600
-                                                        hover:border-indigo-200 dark:hover:border-indigo-800 group p-3">
+                                                        hover:border-emerald-200 dark:hover:border-emerald-800 group p-3">
                                                         <div class="flex items-center">
                                                             <a href="{{ route('chat.show', $channel['channel_url']) }}" class="flex-1 flex items-center">
-                                                                <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30
-                                                                    flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3
-                                                                    group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/40 transition-colors duration-200">
+                                                                <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30
+                                                                    flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-3
+                                                                    group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800/40 transition-colors duration-200">
                                                                     <i class="fas fa-comments text-sm"></i>
                                                                 </div>
                                                                 <div class="flex-1 min-w-0">
-                                                                    <h5 class="font-medium text-gray-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">
+                                                                    <h5 class="font-medium text-gray-900 dark:text-white truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200">
                                                                         {{ $channel['name'] }}
                                                                     </h5>
                                                                     <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center">
@@ -103,7 +103,7 @@
                                                                         @endif
                                                                     </p>
                                                                 </div>
-                                                                <div class="text-indigo-600 dark:text-indigo-400 ml-2">
+                                                                <div class="text-emerald-600 dark:text-emerald-400 ml-2">
                                                                     <i class="fas fa-chevron-right"></i>
                                                                 </div>
                                                             </a>
@@ -126,7 +126,7 @@
                         <!-- Other chats -->
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                <i class="fas fa-comments mr-2 text-indigo-600 dark:text-indigo-400"></i>
+                                <i class="fas fa-comments mr-2 text-emerald-600 dark:text-emerald-400"></i>
                                 Other Conversations
                             </h3>
 
@@ -141,17 +141,17 @@
                                     @foreach($otherChannels as $channel)
                                         <div class="bg-white dark:bg-gray-700 rounded-xl shadow hover:shadow-md
                                             transition-all duration-200 overflow-hidden border border-gray-100 dark:border-gray-600
-                                            hover:border-indigo-200 dark:hover:border-indigo-800 group">
+                                            hover:border-emerald-200 dark:hover:border-emerald-800 group">
                                             <div class="p-5">
                                                 <div class="flex items-center mb-4">
                                                     <a href="{{ route('chat.show', $channel['channel_url']) }}" class="flex-1 flex items-center">
-                                                        <div class="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30
-                                                            flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-4
-                                                            group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/40 transition-colors duration-200">
+                                                        <div class="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30
+                                                            flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-4
+                                                            group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800/40 transition-colors duration-200">
                                                             <i class="fas fa-user-graduate text-lg"></i>
                                                         </div>
                                                         <div class="flex-1 min-w-0">
-                                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">
+                                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200">
                                                                 {{ $channel['name'] }}
                                                             </h3>
                                                             <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
@@ -192,7 +192,7 @@
                                                                 <p class="italic text-gray-400 dark:text-gray-500">No messages yet</p>
                                                             @endif
                                                         </div>
-                                                        <div class="text-indigo-600 dark:text-indigo-400 ml-3 transform group-hover:translate-x-1 transition-transform duration-200">
+                                                        <div class="text-emerald-600 dark:text-emerald-400 ml-3 transform group-hover:translate-x-1 transition-transform duration-200">
                                                             <i class="fas fa-chevron-right"></i>
                                                         </div>
                                                     </div>

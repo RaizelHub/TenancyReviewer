@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Activities') }}
             </h2>
-            <a href="{{ route('activities.create') }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+            <a href="{{ route('activities.create') }}" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -27,7 +27,7 @@
                     <div class="flex flex-wrap gap-4">
                         <div class="w-full md:w-auto">
                             <label for="subject_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filter by Subject</label>
-                            <select name="subject_id" id="subject_id" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 w-full">
+                            <select name="subject_id" id="subject_id" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500 w-full">
                                 <option value="">All Subjects</option>
                                 @foreach(\App\Models\Subject::where('user_id', auth()->id())->orderBy('name')->get() as $subject)
                                     <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="w-full md:w-auto">
                             <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filter by Type</label>
-                            <select name="type" id="type" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 w-full">
+                            <select name="type" id="type" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500 w-full">
                                 <option value="">All Types</option>
                                 <option value="assignment" {{ request('type') == 'assignment' ? 'selected' : '' }}>Assignment</option>
                                 <option value="material" {{ request('type') == 'material' ? 'selected' : '' }}>Material</option>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="w-full md:w-auto">
                             <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filter by Status</label>
-                            <select name="status" id="status" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 w-full">
+                            <select name="status" id="status" class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500 w-full">
                                 <option value="">All Status</option>
                                 <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
                                 <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
@@ -89,7 +89,7 @@
                                             </span>
                                             @php
                                                 $typeColors = [
-                                                    'assignment' => 'purple',
+                                                    'assignment' => 'emerald',
                                                     'material' => 'green',
                                                     'announcement' => 'amber'
                                                 ];
@@ -128,7 +128,7 @@
                         <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">No activities found</h3>
                         <p class="mt-1 text-gray-500 dark:text-gray-400">Create activities for your subjects to get started.</p>
                         <div class="mt-6">
-                            <a href="{{ route('activities.create') }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                            <a href="{{ route('activities.create') }}" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>

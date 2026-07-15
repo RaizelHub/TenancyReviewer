@@ -44,7 +44,7 @@
                                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Teacher</h4>
                                 <div class="flex items-center mt-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                                     <div class="flex-shrink-0 mr-3">
-                                        <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-semibold text-lg">
+                                        <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
                                             {{ substr($subject->user->name, 0, 1) }}
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                             <!-- Final Grade Card -->
                             <div class="mt-6 mb-6">
                                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Your Performance</h4>
-                                <div class="bg-gradient-to-r from-indigo-500 to-blue-600 p-4 rounded-lg text-white shadow-md">
+                                <div class="bg-gradient-to-r from-emerald-500 to-blue-600 p-4 rounded-lg text-white shadow-md">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
@@ -156,9 +156,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="bg-purple-50 dark:bg-purple-900/30 p-3 rounded-lg">
+                                    <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg">
                                         <div class="flex items-center">
-                                            <div class="h-8 w-8 rounded-full bg-purple-100 dark:bg-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-300 mr-2">
+                                            <div class="h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-300 mr-2">
                                                 <i class="fas fa-bullhorn"></i>
                                             </div>
                                             <div>
@@ -197,7 +197,7 @@
                         <!-- Right Column: Classmates -->
                         <div class="md:w-1/3 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                                <i class="fas fa-users mr-2 text-indigo-500"></i>
+                                <i class="fas fa-users mr-2 text-emerald-500"></i>
                                 Classmates ({{ $classmates->count() }})
                             </h3>
 
@@ -209,7 +209,7 @@
                                                 @if($classmate->profile_photo)
                                                     <img src="{{ Storage::url($classmate->profile_photo) }}" alt="{{ $classmate->name }}" class="h-10 w-10 rounded-full object-cover">
                                                 @else
-                                                    <div class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-semibold text-lg">
+                                                    <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
                                                         {{ substr($classmate->name, 0, 1) }}
                                                     </div>
                                                 @endif
@@ -218,7 +218,7 @@
                                                 <h5 class="font-medium text-gray-900 dark:text-white">{{ $classmate->name }}</h5>
                                                 <p class="text-xs text-gray-500 dark:text-gray-400">
                                                     @if($classmate->plan === 'premium')
-                                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300">
+                                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300">
                                                             <i class="fas fa-crown text-yellow-500 mr-1"></i> Premium
                                                         </span>
                                                     @else

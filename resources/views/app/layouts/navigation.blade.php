@@ -217,7 +217,7 @@
                             <p class="text-sm font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">{{ Auth::user()->email }}</p>
                         </div>
-                        <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md mx-1" role="menuitem">
+                        <a href="{{ route('tenant.settings.edit') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md mx-1" role="menuitem">
                             <i class="fas fa-user mr-2 text-blue-500 dark:text-blue-400"></i> Your Profile
                         </a>
                         <a href="{{ route('tenant.settings.edit') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md mx-1" role="menuitem">

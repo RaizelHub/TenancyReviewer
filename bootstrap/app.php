@@ -34,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\SetTenantAppUrl::class,
             \App\Http\Middleware\CheckTenantStatus::class,
             \App\Http\Middleware\TenantAuthentication::class,
+            \App\Http\Middleware\RemoveCentralDomainParameter::class,
         ]);
 
         // Configure global middleware

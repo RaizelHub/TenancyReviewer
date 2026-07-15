@@ -1,19 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="p-2 rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 mr-3">
-                    <i class="fas fa-building text-lg"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {{ __('Tenant Management') }}
-                </h2>
-            </div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div><p class="text-sm font-medium text-emerald-700">Platform workspaces</p><h2 class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">Tenant management</h2><p class="mt-1 text-sm text-gray-500">Manage academy access, domains, and workspace availability.</p></div>
+            <a href="{{ route('tenants.create') }}" class="app-btn-primary self-start"><i class="fas fa-plus"></i>Create tenant</a>
         </div>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-2">
+        <div class="max-w-7xl mx-auto">
             @if(session('success'))
                 <div class="mb-4 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 p-4 rounded-xl shadow-sm flex items-start" role="alert">
                     <i class="fas fa-check-circle text-green-500 mt-0.5 mr-3 text-lg"></i>
@@ -30,16 +24,16 @@
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div class="relative flex-1">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-search text-indigo-400"></i>
+                                <i class="fas fa-search text-emerald-400"></i>
                             </div>
-                            <input type="text" id="searchInput" placeholder="Search tenants by name, email or domain..." class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg leading-5 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150 ease-in-out">
+                            <input type="text" id="searchInput" placeholder="Search tenants by name, email or domain..." class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg leading-5 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-150 ease-in-out">
                         </div>
                         <div class="flex items-center space-x-3">
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-filter text-indigo-400"></i>
+                                    <i class="fas fa-filter text-emerald-400"></i>
                                 </div>
-                                <select id="statusFilter" class="block w-full pl-10 pr-10 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm appearance-none">
+                                <select id="statusFilter" class="block w-full pl-10 pr-10 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm appearance-none">
                                     <option value="">All Statuses</option>
                                     <option value="active">Active</option>
                                     <option value="inactive">Inactive</option>
@@ -56,10 +50,10 @@
             <!-- Tenants Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($tenants as $tenant)
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300">
                         <div class="p-5 flex items-start space-x-4">
                             <div class="flex-shrink-0">
-                                <div class="h-14 w-14 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-medium shadow-md">
+                                <div class="h-14 w-14 rounded-full bg-emerald-600 flex items-center justify-center text-white font-medium shadow-md">
                                     <span class="text-lg font-bold">{{ substr($tenant->name, 0, 2) }}</span>
                                 </div>
                             </div>
@@ -73,7 +67,20 @@
                                 </div>
                                 <div class="mt-1 flex items-center text-sm text-gray-600 dark:text-gray-300">
                                     <i class="fas fa-globe text-gray-400 mr-2"></i>
-                                    <span class="truncate">{{ $tenant->domains->first()->domain ?? 'No domain' }}</span>
+                                    @if($tenant->domains->isNotEmpty())
+                                        @php
+                                            $domain = $tenant->domains->first()->domain;
+                                            $port = request()->getPort();
+                                            $isNonStandard = (request()->getScheme() === 'http' && $port != 80) || (request()->getScheme() === 'https' && $port != 443);
+                                            $url = request()->getScheme() . '://' . $domain . ($isNonStandard ? ':' . $port : '');
+                                        @endphp
+                                        <a href="{{ $url }}" target="_blank" class="text-emerald-600 dark:text-emerald-400 hover:underline flex items-center">
+                                            {{ $domain . ($isNonStandard ? ':' . $port : '') }}
+                                            <i class="fas fa-external-link-alt ml-1.5 text-[10px]"></i>
+                                        </a>
+                                    @else
+                                        <span class="text-gray-500">No domain</span>
+                                    @endif
                                 </div>
                                 <div class="mt-1 flex items-center text-sm text-gray-600 dark:text-gray-300">
                                     <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
@@ -93,7 +100,7 @@
                             </div>
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700/30 px-5 py-3 flex justify-between items-center">
-                            <a href="{{ route('tenants.show', $tenant) }}" class="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium">
+                            <a href="{{ route('tenants.show', $tenant) }}" class="text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-medium">
                                 View Details
                             </a>
                             <div class="flex items-center space-x-2">
@@ -115,7 +122,13 @@
                                         @csrf
                                     </form>
                                 @endif
-                               
+                                <button type="button" onclick="confirmDelete('{{ $tenant->id }}', '{{ $tenant->name }}')" class="p-1.5 rounded-lg text-red-600 hover:text-white dark:text-red-400 dark:hover:text-white hover:bg-red-600 dark:hover:bg-red-600 transition-colors" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <form id="delete-form-{{ $tenant->id }}" action="{{ route('tenants.destroy', $tenant) }}" method="POST" class="hidden">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -126,12 +139,12 @@
             @if($tenants->isEmpty())
             <div class="mt-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-xl border border-gray-100 dark:border-gray-700">
                 <div class="p-10 text-center">
-                    <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20 mb-6">
-                        <i class="fas fa-building text-indigo-400 dark:text-indigo-300 text-4xl"></i>
+                    <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-emerald-50 dark:bg-emerald-900/20 mb-6">
+                        <i class="fas fa-building text-emerald-400 dark:text-emerald-300 text-4xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No tenants found</h3>
                     <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">Get started by creating your first tenant to manage domains and access.</p>
-                    <a href="{{ route('tenants.create') }}" class="inline-flex items-center px-5 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl hover:from-indigo-600 hover:to-purple-600 shadow-md hover:shadow-lg transition-all duration-200">
+                    <a href="{{ route('tenants.create') }}" class="inline-flex items-center px-5 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 shadow-md hover:shadow-lg transition-all duration-200">
                         <i class="fas fa-plus mr-2"></i>
                         Create Your First Tenant
                     </a>
@@ -181,6 +194,29 @@
                     </button>
                     <button type="button" id="confirmEnableBtn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
                         Enable
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Delete Confirmation -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-md w-full p-6 transform transition-all">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 dark:bg-red-900/30 mb-4">
+                    <i class="fas fa-trash-alt text-red-600 dark:text-red-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Delete Tenant</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6" id="deleteModalText">
+                    Are you sure you want to delete this tenant? This will permanently delete their database, domains, and all data. This action CANNOT be undone!
+                </p>
+                <div class="flex justify-center space-x-3">
+                    <button type="button" onclick="closeModal('deleteModal')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="button" id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                        Delete
                     </button>
                 </div>
             </div>
@@ -243,6 +279,14 @@
             document.getElementById('enableModal').classList.remove('hidden');
         }
 
+        function confirmDelete(tenantId, tenantName) {
+            document.getElementById('deleteModalText').textContent = `Are you sure you want to delete ${tenantName}? This will permanently delete their database, domains, and all data. This action CANNOT be undone!`;
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                document.getElementById(`delete-form-${tenantId}`).submit();
+            };
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
         }
@@ -251,6 +295,7 @@
         window.addEventListener('click', function(event) {
             const disableModal = document.getElementById('disableModal');
             const enableModal = document.getElementById('enableModal');
+            const deleteModal = document.getElementById('deleteModal');
 
             if (event.target === disableModal) {
                 closeModal('disableModal');
@@ -258,6 +303,10 @@
 
             if (event.target === enableModal) {
                 closeModal('enableModal');
+            }
+
+            if (event.target === deleteModal) {
+                closeModal('deleteModal');
             }
         });
     </script>

@@ -5,7 +5,7 @@
                 {{ __('Student Dashboard') }}
             </h2>
             <div class="flex space-x-2">
-                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-sm">
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-blue-500 to-emerald-600 text-white shadow-sm">
                     <i class="fas fa-calendar-alt mr-1.5"></i> {{ now()->format('F j, Y') }}
                 </span>
             </div>
@@ -15,7 +15,7 @@
     <div class="py-0">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Welcome Card -->
-            <div class="bg-gradient-to-br from-indigo-600 via-blue-600 to-purple-600 rounded-xl shadow-xl mb-8 overflow-hidden">
+            <div class="bg-gradient-to-br from-emerald-600 via-blue-600 to-emerald-600 rounded-xl shadow-xl mb-8 overflow-hidden">
                 <div class="px-6 py-8 md:px-10 md:py-12 relative">
                     <!-- Decorative elements -->
                     <div class="absolute top-0 right-0 w-64 h-64 opacity-10">
@@ -36,13 +36,13 @@
                         <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">Welcome back, {{ Auth::guard('student')->user()->name ?? 'Student' }}!</h2>
                         <p class="text-blue-100 mb-8 text-lg max-w-2xl leading-relaxed">Access your courses, assignments, and learning materials all in one place. Stay updated with the latest announcements from your teachers.</p>
                         <div class="flex flex-wrap gap-3">
-                            <a href="{{ route('student.assignments') }}" class="inline-flex items-center px-5 py-2.5 bg-white text-indigo-700 rounded-lg hover:bg-blue-50 transition-colors text-sm font-medium shadow-sm">
+                            <a href="{{ route('student.assignments') }}" class="inline-flex items-center px-5 py-2.5 bg-white text-emerald-700 rounded-lg hover:bg-blue-50 transition-colors text-sm font-medium shadow-sm">
                                 <i class="fas fa-tasks mr-2"></i> View Assignments
                             </a>
-                            <a href="{{ route('student.materials') }}" class="inline-flex items-center px-5 py-2.5 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors text-sm font-medium shadow-sm">
+                            <a href="{{ route('student.materials') }}" class="inline-flex items-center px-5 py-2.5 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors text-sm font-medium shadow-sm">
                                 <i class="fas fa-book-open mr-2"></i> Browse Materials
                             </a>
-                            <a href="{{ route('student.subjects') }}" class="inline-flex items-center px-5 py-2.5 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm font-medium shadow-sm">
+                            <a href="{{ route('student.subjects') }}" class="inline-flex items-center px-5 py-2.5 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors text-sm font-medium shadow-sm">
                                 <i class="fas fa-book mr-2"></i> My Subjects
                             </a>
                         </div>
@@ -54,7 +54,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 group">
                     <div class="flex items-center">
-                        <div class="p-4 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white mr-5 group-hover:scale-110 transition-transform duration-300">
+                        <div class="p-4 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-600 text-white mr-5 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-book text-xl"></i>
                         </div>
                         <div>
@@ -178,13 +178,13 @@
                                             <span class="text-sm text-gray-600 dark:text-gray-300">{{ $subject->activities->count() }} activities</span>
                                         </div>
                                         <div class="flex items-center">
-                                            <div class="p-1.5 rounded-md bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 mr-2">
+                                            <div class="p-1.5 rounded-md bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 mr-2">
                                                 <i class="fas fa-user text-sm"></i>
                                             </div>
                                             <span class="text-sm text-gray-600 dark:text-gray-300">{{ $subject->user->name }}</span>
                                         </div>
                                     </div>
-                                    <a href="{{ route('student.subject.show', $subject->id) }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 text-sm font-medium shadow-sm">
+                                    <a href="{{ route('student.subject.show', $subject->id) }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-lg hover:from-blue-700 hover:to-emerald-700 transition-all duration-300 text-sm font-medium shadow-sm">
                                         <i class="fas fa-eye mr-1.5"></i>
                                         View Details
                                     </a>
@@ -205,65 +205,120 @@
                 </div>
             </div>
 
-            <!-- Recent Announcements -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 mb-8">
-                <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-750">
-                    <div class="flex items-center">
-                        <div class="p-2 rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 mr-3">
-                            <i class="fas fa-bullhorn"></i>
+            <!-- Announcements & Study Planner Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Recent Announcements (Left, Span 2) -->
+                <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 self-start">
+                    <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-750">
+                        <div class="flex items-center">
+                            <div class="p-2 rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 mr-3">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Announcements</h3>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Announcements</h3>
+                        <a href="{{ route('student.announcements') }}" class="inline-flex items-center px-3 py-1.5 bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg text-sm font-medium transition-colors">
+                            <span>View All</span>
+                            <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </a>
                     </div>
-                    <a href="{{ route('student.announcements') }}" class="inline-flex items-center px-3 py-1.5 bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg text-sm font-medium transition-colors">
-                        <span>View All</span>
-                        <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
-                    </a>
+
+                    <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                        @php
+                            $recentAnnouncements = collect();
+                            foreach($subjects as $subject) {
+                                $announcements = $subject->activities->where('type', 'announcement')->take(3);
+                                foreach($announcements as $announcement) {
+                                    $announcement->subject = $subject;
+                                    $recentAnnouncements->push($announcement);
+                                }
+                            }
+                            $recentAnnouncements = $recentAnnouncements->sortByDesc('created_at')->take(3);
+                        @endphp
+
+                        @forelse($recentAnnouncements as $announcement)
+                            <div class="p-5 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4">
+                                        <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                                            <i class="fas fa-bullhorn"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <h4 class="text-base font-medium text-gray-900 dark:text-white truncate">{{ $announcement->title }}</h4>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">{{ $announcement->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mb-2">{{ $announcement->description }}</p>
+                                        <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
+                                                {{ $announcement->subject->name }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="p-8 text-center">
+                                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/20 text-amber-500 dark:text-amber-400 mb-3">
+                                    <i class="fas fa-bell-slash"></i>
+                                </div>
+                                <h4 class="text-base font-medium text-gray-900 dark:text-white">No announcements yet</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Check back later for updates from your teachers.</p>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
 
-                <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                    @php
-                        $recentAnnouncements = collect();
-                        foreach($subjects as $subject) {
-                            $announcements = $subject->activities->where('type', 'announcement')->take(3);
-                            foreach($announcements as $announcement) {
-                                $announcement->subject = $subject;
-                                $recentAnnouncements->push($announcement);
-                            }
-                        }
-                        $recentAnnouncements = $recentAnnouncements->sortByDesc('created_at')->take(3);
-                    @endphp
+                <!-- Study Planner (Right, Span 1) -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 self-start">
+                    <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex items-center bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-750">
+                        <div class="p-2 rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 mr-3">
+                            <i class="fas fa-calendar-days"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Study Planner</h3>
+                    </div>
 
-                    @forelse($recentAnnouncements as $announcement)
-                        <div class="p-5 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mr-4">
-                                    <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
-                                        <i class="fas fa-bullhorn"></i>
+                    <div class="p-6">
+                        @php
+                            $upcomingActivities = collect();
+                            foreach($subjects as $subject) {
+                                $acts = $subject->activities->where('due_date', '>=', now()->startOfDay())->where('type', '!=', 'announcement');
+                                foreach($acts as $act) {
+                                    $act->subject = $subject;
+                                    $upcomingActivities->push($act);
+                                }
+                            }
+                            $upcomingActivities = $upcomingActivities->sortBy('due_date')->take(5);
+                        @endphp
+
+                        @if($upcomingActivities->isNotEmpty())
+                            <div class="space-y-4">
+                                @foreach($upcomingActivities as $act)
+                                    <div class="flex items-start gap-3 border-b border-gray-50 dark:border-gray-700/50 pb-3 last:border-0 last:pb-0">
+                                        <div class="flex-shrink-0 text-center rounded-lg bg-emerald-50 dark:bg-emerald-950/40 p-2 min-w-[50px]">
+                                            <span class="block text-[10px] uppercase font-bold text-emerald-500">{{ $act->due_date->format('M') }}</span>
+                                            <span class="block text-lg font-extrabold text-emerald-700 dark:text-emerald-400 leading-none mt-0.5">{{ $act->due_date->format('d') }}</span>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <h4 class="text-sm font-semibold text-gray-900 dark:text-white truncate">{{ $act->title }}</h4>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">{{ $act->subject->name }}</p>
+                                            <span class="inline-flex items-center text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-1 uppercase tracking-wider">
+                                                <i class="fas fa-clock mr-1"></i> Due {{ $act->due_date->format('g:i A') }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h4 class="text-base font-medium text-gray-900 dark:text-white truncate">{{ $announcement->title }}</h4>
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ $announcement->created_at->diffForHumans() }}</span>
-                                    </div>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mb-2">{{ $announcement->description }}</p>
-                                    <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
-                                            {{ $announcement->subject->name }}
-                                        </span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
-                    @empty
-                        <div class="p-8 text-center">
-                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/20 text-amber-500 dark:text-amber-400 mb-3">
-                                <i class="fas fa-bell-slash"></i>
+                        @else
+                            <div class="text-center py-6">
+                                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/20 text-emerald-500 dark:text-emerald-400 mb-3">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h4 class="text-sm font-semibold text-gray-900 dark:text-white">All caught up!</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">No upcoming deadlines or quizzes.</p>
                             </div>
-                            <h4 class="text-base font-medium text-gray-900 dark:text-white">No announcements yet</h4>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Check back later for updates from your teachers.</p>
-                        </div>
-                    @endforelse
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

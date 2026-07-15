@@ -132,7 +132,7 @@
                                                 <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full mr-2">
                                                     Q{{ $index + 1 }}
                                                 </span>
-                                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full mr-2">
+                                                <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full mr-2">
                                                     {{ ucfirst(str_replace('_', ' ', $question->type)) }}
                                                 </span>
                                                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">

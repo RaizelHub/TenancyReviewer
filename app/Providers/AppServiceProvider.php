@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -50,15 +51,42 @@ class AppServiceProvider extends ServiceProvider
         // Share the Route facade with all views
         view()->share('Route', app('router'));
 
-        // Configure URL generation to use the current domain
-        // This ensures that route() helper generates URLs for the current domain
-        // instead of the central domain
-        if (app()->bound('tenant')) {
-            $tenant = app('tenant');
-            if ($tenant) {
-                $domain = request()->getHost();
-                config(['app.url' => request()->getScheme() . '://' . $domain]);
+        // Force the URL generator to use the actual request's scheme+host+port.
+        // This ensures route() always generates URLs matching the browser's address,
+        // preventing about:blank#blocked when accessing via 127.0.0.1 vs localhost.
+        if (app()->runningInConsole() === false && request()->getHost()) {
+            $scheme = request()->getScheme();
+            $host   = request()->getHost();
+            $port   = request()->getPort();
+
+            // Build root URL only including port when it's non-standard
+            $isNonStandardPort = ($scheme === 'http' && $port != 80) || ($scheme === 'https' && $port != 443);
+            $rootUrl = $scheme . '://' . $host . ($isNonStandardPort ? ':' . $port : '');
+
+            URL::forceRootUrl($rootUrl);
+            config(['app.url' => $rootUrl]);
+        }
+
+        // Dynamic system settings overrides
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
+                $dbSettings = \App\Models\Setting::pluck('value', 'key')->all();
+                
+                if (isset($dbSettings['app_name']) && !empty($dbSettings['app_name'])) {
+                    config(['app.name' => $dbSettings['app_name']]);
+                }
+                
+                foreach (['emailjs_public_key', 'emailjs_service_id', 'emailjs_template_approved', 'sendbird_app_id', 'sendbird_api_token', 'sendbird_api_url'] as $key) {
+                    if (isset($dbSettings[$key]) && !empty($dbSettings[$key])) {
+                        $envKey = strtoupper($key);
+                        $_ENV[$envKey] = $dbSettings[$key];
+                        $_SERVER[$envKey] = $dbSettings[$key];
+                        putenv("{$envKey}={$dbSettings[$key]}");
+                    }
+                }
             }
+        } catch (\Exception $e) {
+            // Silently ignore if table doesn't exist during migrations/setup
         }
     }
 }

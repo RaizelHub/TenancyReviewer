@@ -16,10 +16,11 @@ return [
      *
      * Only relevant if you're using the domain or subdomain identification middleware.
      */
-    'central_domains' => [
+    'central_domains' => array_filter([
         '127.0.0.1',
         'localhost',
-    ],
+        parse_url(config('app.url', 'http://localhost'), PHP_URL_HOST),
+    ]),
 
     /**
      * Tenancy bootstrappers are executed when tenancy is initialized.
